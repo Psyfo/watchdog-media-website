@@ -10,6 +10,15 @@ body {
     font-family: 'Myriad Pro', Arial, Helvetica, sans-serif;
 }
 
+dialog {
+    all: unset;
+    display: none;
+}
+
+dialog[open] {
+    display: flex;
+}
+
 @font-face {
     font-family: 'Noteworthy';
     src: url('/fonts/Noteworthy-Light.woff2') format('woff2');
