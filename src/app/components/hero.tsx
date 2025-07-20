@@ -1,48 +1,49 @@
-"use client";
-import React from "react";
-import { motion } from "framer-motion";
+import React from 'react';
+import { Variants, motion } from 'framer-motion';
 
 const textVariants = {
   hidden: (isDesktop: boolean) =>
-    isDesktop
-      ? { opacity: 0, x: -50 } // Desktop: from left
-      : { opacity: 0, y: 50 }, // Mobile: from bottom
+    isDesktop ? { opacity: 0, x: -50 } : { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     x: 0,
     y: 0,
-    transition: { duration: 0.8 },
+    transition: { duration: 1.6, delay: 1 },
   },
-};
+} as Variants;
 
 const bgVariants = {
-  hidden: { opacity: 0, scale: 0.95 },
+  hidden: { scale: 1.1 },
   visible: {
-    opacity: 1,
     scale: 1,
-    transition: { duration: 1 },
+    transition: { duration: 2, ease: 'easeOut' as const },
   },
-};
+} as Variants;
 
 export default function Hero() {
   const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
 
   return (
-    <motion.section
-      initial='hidden'
-      animate='visible'
-      variants={bgVariants}
-      className='relative flex min-h-[80vh] w-full bg-cover bg-center shadow-lg'
-      style={{
-        backgroundImage: "url('/images/wm-hero-monochrome.png')",
-      }}
+    <section
+      className='relative flex min-h-[90vh] w-full overflow-hidden shadow-lg mt-[10vh]'
       aria-label='Watchdog Media Hero'
     >
-      {/* Content container */}
+      {/* Background animation layer */}
+      <motion.div
+        initial='hidden'
+        animate='visible'
+        variants={bgVariants}
+        className='absolute inset-0 bg-center bg-cover'
+        style={{
+          backgroundImage: "url('/images/wm-hero-monochrome.png')",
+        }}
+      />
+
+      {/* Foreground content */}
       <div
         className='
-          absolute inset-0 flex w-full 
-          items-end justify-center pb-[20%]
+          relative z-10 flex w-full 
+          items-end justify-center pb-[50%]
           md:items-center md:justify-center md:w-1/2 md:pb-0
         '
       >
@@ -51,11 +52,11 @@ export default function Hero() {
           initial='hidden'
           animate='visible'
           variants={textVariants}
-          className='font-noteworthy text-white text-[2rem] font-bold text-center md:text-left'
+          className='font-myriad text-white text-[36px] font-bold text-center md:text-left'
         >
           Watchdog media
         </motion.h1>
       </div>
-    </motion.section>
+    </section>
   );
 }
