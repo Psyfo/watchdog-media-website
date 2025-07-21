@@ -1,27 +1,34 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { Variants, motion } from 'framer-motion';
 
-const textVariants = {
-  hidden: (isDesktop: boolean) =>
-    isDesktop ? { opacity: 0, x: -50 } : { opacity: 0, y: 50 },
+const textVariants = (isDesktop: boolean): Variants => ({
+  hidden: isDesktop ? { opacity: 0, x: -50 } : { opacity: 0, y: 50 },
   visible: {
     opacity: 1,
     x: 0,
     y: 0,
     transition: { duration: 1.6, delay: 1 },
   },
-} as Variants;
+});
 
-const bgVariants = {
+const bgVariants: Variants = {
   hidden: { scale: 1.1 },
   visible: {
     scale: 1,
-    transition: { duration: 2, ease: 'easeOut' as const },
+    transition: { duration: 2, ease: 'easeOut' },
   },
-} as Variants;
+};
 
 export default function Hero() {
-  const isDesktop = typeof window !== 'undefined' && window.innerWidth >= 768;
+  const [isDesktop, setIsDesktop] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    setIsDesktop(window.innerWidth >= 768);
+  }, []);
+
+  // Don't render until client-side hydration is complete
+  if (isDesktop === null) return null;
 
   return (
     <section
@@ -48,10 +55,9 @@ export default function Hero() {
         '
       >
         <motion.h1
-          custom={isDesktop}
           initial='hidden'
           animate='visible'
-          variants={textVariants}
+          variants={textVariants(isDesktop)}
           className='font-myriad text-white text-[36px] font-bold text-center md:text-left'
         >
           Watchdog media
