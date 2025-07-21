@@ -28,7 +28,7 @@ const TextBlock: React.FC<TextBlockProps> = ({ heading, text }) => {
       animate={isInView ? 'visible' : 'hidden'}
     >
       {heading && (
-        <h1 className='mb-6 text-[18px] font-bold text-watchdog-dark font-noteworthy md:text-[30px] uppercase'>
+        <h1 className='mb-6 text-[18px] font-bold text-watchdog-purple font-noteworthy md:text-[30px] uppercase'>
           {heading}
         </h1>
       )}
