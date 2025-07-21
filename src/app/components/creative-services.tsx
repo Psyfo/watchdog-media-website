@@ -28,7 +28,7 @@ const serviceData = [
 
 const CreativeServices: React.FC = () => {
   return (
-    <section className='flex flex-col items-center px-6 py-16 text-center bg-white md:py-24'>
+    <section className='flex flex-col items-center px-6 py-16 text-center bg-watchdog-light md:py-24'>
       <TextBlock
         heading='Creative Services'
         text='Watchdog Media offers a range of creative services to support your film production needs.'
