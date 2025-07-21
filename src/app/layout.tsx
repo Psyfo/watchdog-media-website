@@ -1,6 +1,7 @@
-import "./globals.css";
-import Navbar from "@/components/navbar";
-import type { Metadata } from "next";
+import './globals.css';
+import Footer from '@/components/footer';
+import Navbar from '@/components/navbar';
+import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Watchdog Media',
@@ -18,6 +19,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );
