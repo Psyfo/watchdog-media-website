@@ -1,7 +1,7 @@
 'use client';
-import Image from 'next/image';
 import React from 'react';
 import ServiceCard from '@/components/service-card';
+import TextBlock from '@/components/text-block';
 
 const serviceData = [
   {
@@ -30,17 +30,12 @@ const serviceData = [
 const FilmSupport: React.FC = () => {
   return (
     <section className='flex flex-col items-center px-6 py-16 text-center md:py-24'>
-      <h2 className='mb-6 text-[18px] font-bold text-watchdog-dark font-noteworthy md:text-[30px] uppercase'>
-        Film Production Support
-      </h2>
-      <p className='md:max-w-[50vw] text-base leading-relaxed text-watchdog-dark font-myriad md:text-[30px] text-justify pb-12'>
-        Watchdog Media provides and manages the key logistical elements of your
-        film production to ensure that both your crew and cast experience a
-        smooth, seamlessly executed film shoot in Durban and other areas of
-        KwaZulu-Natal, South Africa.
-      </p>
+      <TextBlock
+        heading='Film Production Support'
+        text='Watchdog Media provides and manages the key logistical elements of your film production to ensure that both your crew and cast experience a smooth, seamlessly executed film shoot in Durban and other areas of KwaZulu-Natal, South Africa.'
+      />
 
-      <div className='mb-12'>
+      <div className='my-12'>
         <h3 className='mb-4 font-bold text-[1rem] text-watchdog-dark font-myriad md:text-[1.5rem]'>
           Our Production Support Services span across:
         </h3>
@@ -54,7 +49,7 @@ const FilmSupport: React.FC = () => {
       <div className='grid w-full max-w-6xl grid-cols-1 gap-8 md:grid-cols-3'>
         {serviceData.map((service, idx) => (
           <ServiceCard
-            key={idx}
+            key={service.heading}
             imageSrc={service.imageSrc}
             imageAlt={service.imageAlt}
             heading={service.heading}
