@@ -4,14 +4,14 @@ import React from 'react';
 
 const Footer: React.FC = () => {
   return (
-    <footer className='bg-zinc-900 text-white px-6 py-12'>
-      <div className='max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-8 text-sm'>
+    <footer className='px-6 py-12 text-white bg-watchdog-dark'>
+      <div className='grid grid-cols-1 gap-8 mx-auto text-sm max-w-7xl md:grid-cols-4'>
         {/* Company Info */}
         <div>
-          <h2 className='text-lg font-bold mb-2'>
+          <h2 className='mb-2 text-lg font-bold'>
             Watchdog Media (Pty) Limited
           </h2>
-          <address className='not-italic leading-relaxed text-zinc-400'>
+          <address className='not-italic leading-relaxed text-watchdog-light'>
             17 Howick Drive, Waterfall
             <br />
             Durban, KwaZulu Natal
@@ -22,8 +22,8 @@ const Footer: React.FC = () => {
 
         {/* Services */}
         <div>
-          <h3 className='font-semibold mb-2'>Services</h3>
-          <ul className='space-y-1 text-zinc-400'>
+          <h3 className='mb-2 font-semibold'>Services</h3>
+          <ul className='space-y-1 text-watchdog-light'>
             <li>
               <Link href='/production-support'>
                 Production Support Services
@@ -49,8 +49,8 @@ const Footer: React.FC = () => {
 
         {/* Production */}
         <div>
-          <h3 className='font-semibold mb-2'>Productions</h3>
-          <ul className='space-y-1 text-zinc-400'>
+          <h3 className='mb-2 font-semibold'>Productions</h3>
+          <ul className='space-y-1 text-watchdog-light'>
             <li>
               <Link href='/film-office'>Film Production Office</Link>
             </li>
@@ -74,8 +74,8 @@ const Footer: React.FC = () => {
 
         {/* Legal & More */}
         <div>
-          <h3 className='font-semibold mb-2'>Company</h3>
-          <ul className='space-y-1 text-zinc-400'>
+          <h3 className='mb-2 font-semibold'>Company</h3>
+          <ul className='space-y-1 text-watchdog-light'>
             <li>
               <Link href='/about'>About</Link>
             </li>
@@ -98,7 +98,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
 
-      <div className='mt-10 text-center text-xs text-zinc-500'>
+      <div className='mt-10 text-xs text-center text-zinc-500'>
         &copy; {new Date().getFullYear()} Watchdog Media (Pty) Limited. All
         rights reserved.
       </div>
