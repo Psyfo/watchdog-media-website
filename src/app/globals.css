@@ -19,6 +19,10 @@ dialog[open] {
     display: flex;
 }
 
+.no-scroll {
+    overflow: hidden;
+}
+
 @font-face {
     font-family: 'Noteworthy';
     src: url('/fonts/Noteworthy-Light.woff2') format('woff2');
