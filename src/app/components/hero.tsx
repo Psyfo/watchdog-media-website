@@ -1,6 +1,6 @@
-'use client';
-import React, { useEffect, useState } from 'react';
-import { Variants, motion } from 'framer-motion';
+"use client";
+import React, { useEffect, useState } from "react";
+import { Variants, motion } from "framer-motion";
 
 const textVariants = (isDesktop: boolean): Variants => ({
   hidden: isDesktop ? { opacity: 0, x: -50 } : { opacity: 0, y: 50 },

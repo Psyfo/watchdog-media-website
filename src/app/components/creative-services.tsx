@@ -1,6 +1,7 @@
-import React from 'react';
-import ServiceCard from '@/components/service-card';
-import TextBlock from '../../components/text-block';
+"use client";
+import React from "react";
+import ServiceCard from "@/components/service-card";
+import TextBlock from "../../components/text-block";
 
 const serviceData = [
   {

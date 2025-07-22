@@ -1,5 +1,6 @@
-import React from 'react';
-import TextBlock from '@/components/text-block';
+"use client";
+import React from "react";
+import TextBlock from "@/components/text-block";
 
 const Welcome: React.FC = () => {
   return (
