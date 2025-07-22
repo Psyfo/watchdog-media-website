@@ -1,8 +1,14 @@
 'use client';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Footer: React.FC = () => {
+  const [year, setYear] = useState<number | null>(null);
+
+  useEffect(() => {
+    setYear(new Date().getFullYear());
+  }, []);
+
   return (
     <footer className='px-6 py-12 text-white bg-watchdog-dark'>
       <div className='grid grid-cols-1 gap-8 mx-auto text-sm max-w-7xl md:grid-cols-4'>
@@ -99,8 +105,11 @@ const Footer: React.FC = () => {
       </div>
 
       <div className='mt-10 text-xs text-center text-zinc-500'>
-        &copy; {new Date().getFullYear()} Watchdog Media (Pty) Limited. All
-        rights reserved.
+        {year && (
+          <span>
+            &copy; {year} Watchdog Media (Pty) Limited. All rights reserved.
+          </span>
+        )}
       </div>
     </footer>
   );

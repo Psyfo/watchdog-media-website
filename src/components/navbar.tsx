@@ -1,10 +1,10 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useEffect, useRef, useState } from 'react';
+"use client";
+import Image from "next/image";
+import Link from "next/link";
+import { AnimatePresence, Variants, motion } from "framer-motion";
+import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 
 const navItems = [
   { label: 'About', href: '/about' },
@@ -59,10 +59,21 @@ export default function Navbar() {
 
   useEffect(() => {
     const dialog = dialogRef.current;
+    const body = document.body;
+
     if (!dialog) return;
 
-    if (menuOpen) dialog.showModal();
-    else if (dialog.open) dialog.close();
+    if (menuOpen) {
+      dialog.showModal();
+      body.classList.add('no-scroll');
+    } else {
+      if (dialog.open) dialog.close();
+      body.classList.remove('no-scroll');
+    }
+
+    return () => {
+      body.classList.remove('no-scroll'); // Cleanup just in case
+    };
   }, [menuOpen]);
 
   return (
