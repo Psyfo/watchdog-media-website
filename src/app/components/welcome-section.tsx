@@ -1,8 +1,8 @@
-"use client";
-import React from "react";
-import TextBlock from "@/components/text-block";
+'use client';
+import React from 'react';
+import TextBlock from '@/components/text-block';
 
-const Welcome: React.FC = () => {
+const WelcomeSection: React.FC = () => {
   return (
     <section className='flex flex-col items-center justify-center px-6 py-[80px] text-center md:py-[120px] bg-watchdog-light'>
       <TextBlock
@@ -13,4 +13,4 @@ const Welcome: React.FC = () => {
   );
 };
 
-export default Welcome;
+export default WelcomeSection;

@@ -1,7 +1,7 @@
-"use client";
-import React from "react";
-import ServiceCard from "@/components/service-card";
-import TextBlock from "../../components/text-block";
+'use client';
+import React from 'react';
+import ServiceCard from '@/components/service-card';
+import TextBlock from '../../components/text-block';
 
 const serviceData = [
   {
@@ -27,7 +27,7 @@ const serviceData = [
   },
 ];
 
-const CreativeServices: React.FC = () => {
+const CreativeServicesSection: React.FC = () => {
   return (
     <section className='flex flex-col items-center px-6 py-16 text-center bg-watchdog-light md:py-24'>
       <TextBlock
@@ -50,4 +50,4 @@ const CreativeServices: React.FC = () => {
   );
 };
 
-export default CreativeServices;
+export default CreativeServicesSection;

@@ -1,10 +1,10 @@
-import Awards from "./components/awards";
-import CreativeServices from "./components/creative-services";
-import FilmSupport from "./components/film-support";
-import Hero from "./components/hero";
-import Productions from "./components/productions";
-import Welcome from "./components/welcome";
-import { Metadata } from "next";
+import AwardsSection from './components/awards-section';
+import CreativeServicesSection from './components/creative-services-section';
+import FilmSupportSection from './components/film-support-section';
+import HeroSection from './components/hero-section';
+import ProductionsSection from './components/productions-section';
+import WelcomeSection from './components/welcome-section';
+import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Home | Watchdog Media',
@@ -38,12 +38,12 @@ export default function Home() {
   return (
     <div className=''>
       <main>
-        <Hero />
-        <Welcome />
-        <FilmSupport />
-        <CreativeServices />
-        <Awards />
-        <Productions />
+        <HeroSection />
+        <WelcomeSection />
+        <FilmSupportSection />
+        <CreativeServicesSection />
+        <AwardsSection />
+        <ProductionsSection />
       </main>
     </div>
   );

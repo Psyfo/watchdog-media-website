@@ -56,7 +56,7 @@ const AnimatedBlock: React.FC<{ children: React.ReactNode }> = ({
   );
 };
 
-const FilmSupport: React.FC = () => {
+const FilmSupportSection: React.FC = () => {
   return (
     <section className='flex flex-col items-center px-6 py-16 text-center md:py-24'>
       <TextBlock
@@ -101,4 +101,4 @@ const FilmSupport: React.FC = () => {
   );
 };
 
-export default FilmSupport;
+export default FilmSupportSection;

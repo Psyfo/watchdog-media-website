@@ -1,9 +1,9 @@
-"use client";
-import ProductionItem from "@/components/production-item";
-import React from "react";
-import TextBlock from "@/components/text-block";
+'use client';
+import ProductionItem from '@/components/production-item';
+import React from 'react';
+import TextBlock from '@/components/text-block';
 
-const Productions: React.FC = () => {
+const ProductionsSection: React.FC = () => {
   return (
     <section className='flex flex-col items-center px-6 py-16 text-center bg-gray-100 md:py-24'>
       <TextBlock
@@ -21,4 +21,4 @@ const Productions: React.FC = () => {
   );
 };
 
-export default Productions;
+export default ProductionsSection;
