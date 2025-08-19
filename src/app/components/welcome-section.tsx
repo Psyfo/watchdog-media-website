@@ -1,6 +1,7 @@
 'use client';
 import React from 'react';
-import TextBlock from '@/components/text-block';
+
+import TextBlock from '@/components/TextBlock';
 
 const WelcomeSection: React.FC = () => {
   return (
