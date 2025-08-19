@@ -1,0 +1,302 @@
+@import "tailwindcss";
+
+/* Brand design tokens */
+:root {
+    /* Core palette */
+    --wd-black: #000000;
+    --wd-slate: #4C4C4C;
+    --wd-plum: #510051;
+    --wd-silver: #D9D9D9;
+    --wd-magenta: #EC008C;
+    --wd-yellow: #FFF200;
+
+    /* Semantic */
+    --wd-bg: var(--wd-black);
+    --wd-surface: var(--wd-slate);
+    --wd-text: var(--wd-silver);
+    --wd-text-inverse: var(--wd-black);
+    --wd-primary: var(--wd-plum);
+    --wd-accent-1: var(--wd-magenta);
+    --wd-accent-2: var(--wd-yellow);
+
+    /* Borders (fallback first; override with color-mix where supported) */
+    --wd-border-alpha: rgba(217, 217, 217, 0.35);
+}
+
+/* Optional light theme override via [data-theme="light"] on <html> or <body> */
+[data-theme="light"] {
+    --wd-bg: #ffffff;
+    --wd-surface: #f6f6f6;
+    --wd-text: #111111;
+    --wd-text-inverse: #111111;
+}
+
+/* Enable dark-first UI */
+html {
+    color-scheme: dark;
+}
+
+body {
+    background: var(--wd-bg);
+    color: var(--wd-text);
+    font-family: 'Myriad Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Type scale aligned to BRAND.md */
+h1,
+h2,
+h3,
+h4 {
+    font-family: 'Noteworthy', 'Patrick Hand', 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
+    line-height: 1.25;
+    color: var(--wd-silver);
+    font-weight: 700;
+    letter-spacing: 0.1px;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: clamp(3rem, 6vw, 4rem);
+}
+
+/* 48–64px */
+h2 {
+    font-size: clamp(2.25rem, 4vw, 3rem);
+}
+
+/* 36–48px */
+h3 {
+    font-size: 1.75rem;
+}
+
+/* 28px */
+h4 {
+    font-size: 1.375rem;
+}
+
+/* 22px */
+small {
+    font-size: 0.875rem;
+    line-height: 1.4;
+}
+
+/* 14px */
+
+p+p {
+    margin-top: 1rem;
+}
+
+
+/* Links */
+a {
+    color: var(--wd-magenta);
+    text-underline-offset: 3px;
+    text-decoration-thickness: 2px;
+}
+
+a:hover {
+    color: var(--wd-yellow);
+    text-decoration: underline;
+}
+
+a:focus-visible {
+    outline: 2px solid var(--wd-yellow);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* Buttons (utility classes for non-Tailwind elements) */
+.button,
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.625rem 1rem;
+    border-radius: 8px;
+    border: 1px solid transparent;
+    font-weight: 600;
+    line-height: 1.2;
+    cursor: pointer;
+    transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .05s ease;
+}
+
+.btn:active {
+    transform: translateY(1px);
+}
+
+.btn--primary {
+    background: var(--wd-magenta);
+    color: var(--wd-text-inverse);
+}
+
+.btn--primary:hover {
+    background: var(--wd-plum);
+    color: var(--wd-silver);
+}
+
+.btn--secondary {
+    background: var(--wd-yellow);
+    color: var(--wd-text-inverse);
+}
+
+.btn--secondary:hover {
+    background: var(--wd-slate);
+    color: var(--wd-silver);
+}
+
+.btn--ghost {
+    background: transparent;
+    color: var(--wd-magenta);
+    border-color: var(--wd-border-alpha);
+}
+
+.btn--ghost:hover {
+    color: var(--wd-yellow);
+    border-color: var(--wd-yellow);
+}
+
+/* Cards / Surfaces */
+.card {
+    background: var(--wd-surface);
+    color: var(--wd-text);
+    border: 1px solid var(--wd-border-alpha);
+    border-radius: 8px;
+}
+
+/* Forms */
+input,
+select,
+textarea {
+    background: var(--wd-slate);
+    color: var(--wd-silver);
+    border: 1px solid var(--wd-border-alpha);
+    border-radius: 8px;
+    padding: 0.5rem 0.75rem;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: color-mix(in oklab, var(--wd-silver) 60%, transparent);
+}
+
+@supports not (color: color-mix(in oklab, white, black)) {
+
+    input::placeholder,
+    textarea::placeholder {
+        color: rgba(217, 217, 217, 0.6);
+    }
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--wd-yellow);
+    outline-offset: 2px;
+    border-color: var(--wd-yellow);
+}
+
+/* Icons (works for Phosphor React with .icon or CDN .ph) */
+.icon,
+.ph {
+    color: var(--wd-silver);
+    vertical-align: middle;
+}
+
+a:hover .icon,
+button:hover .icon,
+a:hover .ph,
+button:hover .ph {
+    color: var(--wd-yellow);
+}
+
+.btn--primary .icon,
+.btn--primary .ph {
+    color: var(--wd-text-inverse);
+}
+
+/* Selection */
+::selection {
+    background: color-mix(in oklab, var(--wd-magenta) 30%, transparent);
+    color: var(--wd-silver);
+}
+
+@supports not (color: color-mix(in oklab, white, black)) {
+    ::selection {
+        background: rgba(236, 0, 140, 0.3);
+        color: #fff;
+    }
+}
+
+/* Dialog base (keeps your previous behavior) */
+dialog {
+    all: unset;
+    display: none;
+    background: var(--wd-surface);
+    color: var(--wd-text);
+    border: 1px solid var(--wd-border-alpha);
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+dialog[open] {
+    display: flex;
+}
+
+/* Utilities */
+.no-scroll {
+    overflow: hidden;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* Font faces (kept) */
+@font-face {
+    font-family: 'Noteworthy';
+    src: url('/fonts/Noteworthy-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noteworthy';
+    src: url('/fonts/Noteworthy.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Noteworthy';
+    src: url('/fonts/Noteworthy-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('/fonts/MyriadPro-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Myriad Pro';
+    src: url('/fonts/MyriadPro-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+}
