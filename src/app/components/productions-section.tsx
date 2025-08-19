@@ -1,7 +1,8 @@
 'use client';
-import ProductionItem from '@/components/production-item';
 import React from 'react';
-import TextBlock from '@/components/text-block';
+
+import ProductionItem from '@/components/ProductionItem';
+import TextBlock from '@/components/TextBlock';
 
 const ProductionsSection: React.FC = () => {
   return (
