@@ -1,10 +1,11 @@
-import AwardsSection from './components/awards-section';
-import CreativeServicesSection from './components/creative-services-section';
-import FilmSupportSection from './components/film-support-section';
-import HeroSection from './components/hero-section';
-import ProductionsSection from './components/productions-section';
-import WelcomeSection from './components/welcome-section';
 import { Metadata } from 'next';
+
+import AwardsSection from '../components/awards-section';
+import CreativeServicesSection from '../components/creative-services-section';
+import FilmSupportSection from '../components/film-support-section';
+import HeroSection from '../components/hero-section';
+import ProductionsSection from '../components/productions-section';
+import WelcomeSection from '../components/welcome-section';
 
 export const metadata: Metadata = {
   title: 'Home | Watchdog Media',
