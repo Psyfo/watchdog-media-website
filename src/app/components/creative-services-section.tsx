@@ -1,7 +1,9 @@
 'use client';
 import React from 'react';
-import ServiceCard from '@/components/service-card';
-import TextBlock from '../../components/text-block';
+
+import ServiceCard from '@/components/ServiceCard';
+
+import TextBlock from '../../components/TextBlock';
 
 const serviceData = [
   {
