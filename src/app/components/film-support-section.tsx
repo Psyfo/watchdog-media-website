@@ -1,8 +1,9 @@
 'use client';
+import { motion, useInView, Variants } from 'framer-motion';
 import React, { useRef } from 'react';
-import ServiceCard from '@/components/service-card';
-import TextBlock from '@/components/text-block';
-import { Variants, motion, useInView } from 'framer-motion';
+
+import ServiceCard from '@/components/ServiceCard';
+import TextBlock from '@/components/TextBlock';
 
 const serviceData = [
   {
