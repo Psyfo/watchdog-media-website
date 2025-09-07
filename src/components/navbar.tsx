@@ -110,14 +110,14 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ type: 'spring', stiffness: 300, damping: 30 }}
       >
-        <div className='flex items-center justify-between w-full px-6 py-4 max-w-7xl mx-auto'>
+        <div className='flex justify-between items-center mx-auto px-6 py-4 w-full max-w-7xl'>
           {/* Logo */}
           <motion.div
             className='flex-shrink-0'
             whileHover={{ scale: 1.02 }}
             transition={{ type: 'spring', stiffness: 400 }}
           >
-            <Link href='/' className='flex items-center gap-2 group'>
+            <Link href='/' className='group flex items-center gap-2'>
               <motion.div
                 whileHover={{ rotate: 5 }}
                 transition={{ type: 'spring', stiffness: 300 }}
@@ -127,7 +127,7 @@ export default function Navbar() {
                   alt='Watchdog Media Logo'
                   width={120}
                   height={40}
-                  className='w-auto h-10 md:h-12 transition-all duration-300 group-hover:brightness-90'
+                  className='group-hover:brightness-90 w-auto h-10 md:h-12 transition-all duration-300'
                 />
               </motion.div>
               <Image
@@ -135,13 +135,13 @@ export default function Navbar() {
                 alt='Watchdog Media Text'
                 width={120}
                 height={40}
-                className='w-auto h-12 md:h-16 transition-all duration-300 group-hover:brightness-90'
+                className='group-hover:brightness-90 w-auto h-12 md:h-16 transition-all duration-300'
               />
             </Link>
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className='items-center hidden gap-8 ml-auto lg:flex'>
+          <div className='hidden lg:flex items-center gap-8 ml-auto'>
             {navItems.map((item, index) => {
               const isActive = pathname.startsWith(item.href);
               return (
@@ -163,11 +163,11 @@ export default function Navbar() {
                         : 'text-[var(--wd-text)] hover:text-[var(--wd-magenta)]'
                     }`}
                   >
-                    <span className='relative z-10'>{item.label}</span>
+                    <span className='z-10 relative'>{item.label}</span>
 
                     {/* Hover underline */}
                     <motion.div
-                      className='absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-[var(--wd-magenta)] to-[var(--wd-plum)]'
+                      className='bottom-0 left-0 absolute bg-gradient-to-r from-[var(--wd-magenta)] to-[var(--wd-plum)] w-full h-0.5'
                       initial={{ scaleX: 0 }}
                       animate={{ scaleX: isActive ? 1 : 0 }}
                       whileHover={{ scaleX: 1 }}
@@ -177,7 +177,7 @@ export default function Navbar() {
 
                     {/* Hover glow effect */}
                     <motion.div
-                      className='absolute inset-0 bg-gradient-to-r from-[var(--wd-magenta)]/10 to-[var(--wd-plum)]/10 rounded-lg -z-10'
+                      className='-z-10 absolute inset-0 bg-gradient-to-r from-[var(--wd-magenta)]/10 to-[var(--wd-plum)]/10 rounded-lg'
                       initial={{ opacity: 0, scale: 0.8 }}
                       whileHover={{ opacity: 1, scale: 1.1 }}
                       transition={{ duration: 0.3 }}
@@ -191,7 +191,7 @@ export default function Navbar() {
           {/* Mobile Menu Button */}
           <motion.button
             onClick={() => setMenuOpen(true)}
-            className='lg:hidden p-2 rounded-lg bg-[var(--wd-surface)] backdrop-blur-sm border border-[var(--wd-border-alpha)] hover:bg-[var(--wd-slate)]/20 transition-all duration-300'
+            className='lg:hidden bg-[var(--wd-surface)] hover:bg-[var(--wd-slate)]/20 backdrop-blur-sm p-2 border border-[var(--wd-border-alpha)] rounded-lg transition-all duration-300'
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             aria-label='Open menu'
@@ -205,50 +205,102 @@ export default function Navbar() {
       <AnimatePresence>
         {menuOpen && (
           <motion.div
-            className='fixed inset-0 z-50'
+            className='z-50 fixed inset-0'
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4 }}
           >
-            {/* Backdrop with animated grain */}
+            {/* Soft lilac gradient backdrop */}
             <motion.div
-              className='absolute inset-0 bg-black/95 backdrop-blur-xl'
+              className='absolute inset-0 backdrop-blur-xl'
+              style={{
+                background: `
+                  linear-gradient(135deg, 
+                    #f8f4ff 0%,
+                    #f0e6ff 15%,
+                    #e8d5ff 30%,
+                    #dcc5ff 45%,
+                    #d1b3ff 60%,
+                    #c5a0ff 75%,
+                    #b88dff 85%,
+                    #ac7aff 100%
+                  )
+                `,
+              }}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setMenuOpen(false)}
             />
 
-            {/* Animated background pattern */}
+            {/* Soft animated pattern overlay */}
             <motion.div
-              className='absolute inset-0 opacity-10'
+              className='absolute inset-0 opacity-20'
               style={{
                 background: `
-                  radial-gradient(circle at 20% 80%, var(--wd-plum) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, var(--wd-magenta) 0%, transparent 50%),
-                  radial-gradient(circle at 40% 40%, var(--wd-yellow) 0%, transparent 70%)
+                  radial-gradient(circle at 20% 30%, #dcc5ff 0%, transparent 40%),
+                  radial-gradient(circle at 80% 70%, #c5a0ff 0%, transparent 40%),
+                  radial-gradient(circle at 40% 80%, #f0e6ff 0%, transparent 30%),
+                  radial-gradient(circle at 60% 20%, #b88dff 0%, transparent 35%)
                 `,
               }}
               animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, 1, 0],
+                scale: [1, 1.05, 1],
+                rotate: [0, 2, 0],
               }}
               transition={{
-                duration: 20,
+                duration: 15,
                 repeat: Infinity,
-                ease: 'linear',
+                ease: 'easeInOut',
+              }}
+            />
+
+            {/* Floating geometric shapes with soft colors */}
+            <motion.div
+              className='top-20 left-10 absolute rounded-full w-16 h-16'
+              style={{
+                background: 'linear-gradient(135deg, #f0e6ff 0%, #dcc5ff 100%)',
+                filter: 'blur(8px)',
+              }}
+              animate={{
+                x: [0, 30, 0],
+                y: [0, -20, 0],
+                scale: [1, 1.2, 1],
+              }}
+              transition={{
+                duration: 8,
+                repeat: Infinity,
+                ease: 'easeInOut',
+              }}
+            />
+            <motion.div
+              className='right-16 bottom-32 absolute rounded-full w-12 h-12'
+              style={{
+                background: 'linear-gradient(135deg, #c5a0ff 0%, #b88dff 100%)',
+                filter: 'blur(6px)',
+              }}
+              animate={{
+                x: [0, -25, 0],
+                y: [0, 15, 0],
+                scale: [1, 1.3, 1],
+              }}
+              transition={{
+                duration: 10,
+                repeat: Infinity,
+                ease: 'easeInOut',
+                delay: 2,
               }}
             />
 
             <dialog
               ref={dialogRef}
               onClose={() => setMenuOpen(false)}
-              className='fixed inset-0 z-10 w-screen h-screen p-0 m-0 bg-transparent border-0 max-w-none max-h-none'
+              className='z-10 fixed inset-0 bg-transparent m-0 p-0 border-0 w-screen max-w-none h-screen max-h-none'
               style={{ all: 'unset', position: 'fixed', inset: 0, zIndex: 10 }}
             >
               <motion.div
-                className='relative flex flex-col items-center justify-center w-full h-full px-6 perspective-1000'
+                className='relative flex flex-col justify-center items-center px-6 w-full h-full perspective-1000'
                 variants={containerVariants}
                 initial='hidden'
                 animate='visible'
@@ -257,20 +309,30 @@ export default function Navbar() {
                 {/* Close Button */}
                 <motion.button
                   onClick={() => setMenuOpen(false)}
-                  className='absolute top-6 right-6 p-3 rounded-full bg-white/20 backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all duration-300 z-20'
+                  className='top-6 right-6 z-20 absolute shadow-lg p-3 border rounded-full transition-all duration-300'
+                  style={{
+                    background:
+                      'linear-gradient(135deg, #ffffff 0%, #f8f4ff 100%)',
+                    borderColor: '#dcc5ff',
+                  }}
+                  whileHover={{
+                    scale: 1.1,
+                    rotate: 90,
+                    background:
+                      'linear-gradient(135deg, #f0e6ff 0%, #e8d5ff 100%)',
+                  }}
                   initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
                   animate={{ opacity: 1, rotate: 0, scale: 1 }}
                   exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
-                  whileHover={{ scale: 1.1, rotate: 90 }}
                   whileTap={{ scale: 0.9 }}
                   transition={{ type: 'spring', stiffness: 300, delay: 0.3 }}
                   aria-label='Close menu'
                 >
-                  <X className='w-6 h-6 text-white' />
+                  <X className='w-6 h-6' style={{ color: '#6b46c1' }} />
                 </motion.button>
 
                 {/* Navigation Items */}
-                <div className='flex flex-col items-center gap-8 z-10'>
+                <div className='z-10 flex flex-col items-center gap-6'>
                   {navItems.map((item, index) => {
                     const isActive = pathname.startsWith(item.href);
                     return (
@@ -283,23 +345,23 @@ export default function Navbar() {
                         <Link
                           href={item.href}
                           onClick={() => setMenuOpen(false)}
-                          className={`relative font-noteworthy font-bold text-5xl md:text-6xl lg:text-7xl transition-all duration-500 group block ${
+                          className={`relative font-noteworthy font-bold text-4xl md:text-5xl lg:text-6xl transition-all duration-500 group block ${
                             isActive
-                              ? 'text-[var(--wd-yellow)]'
-                              : 'text-white hover:text-[var(--wd-yellow)]'
+                              ? 'text-[#6b46c1]' // Deep purple for active
+                              : 'text-[#8b5a9f] hover:text-[#6b46c1]' // Soft purple for normal
                           }`}
                         >
                           <motion.span
-                            className='relative z-10 block'
+                            className='block z-10 relative'
                             whileHover={{
                               scale: 1.05,
-                              rotateY: 5,
-                              rotateX: -2,
+                              rotateY: 3,
+                              rotateX: -1,
                             }}
                             whileTap={{
                               scale: 0.95,
-                              rotateY: -3,
-                              rotateX: 2,
+                              rotateY: -2,
+                              rotateX: 1,
                             }}
                             transition={{
                               type: 'spring',
@@ -310,13 +372,17 @@ export default function Navbar() {
                             {item.label}
                           </motion.span>
 
-                          {/* Film strip effect */}
+                          {/* Soft gradient background */}
                           <motion.div
-                            className='absolute inset-0 bg-gradient-to-r from-[var(--wd-yellow)]/10 via-[var(--wd-magenta)]/10 to-[var(--wd-plum)]/10 rounded-2xl -z-10'
-                            initial={{ opacity: 0, scale: 0.8, rotateX: -15 }}
+                            className='-z-10 absolute inset-0 rounded-2xl'
+                            style={{
+                              background:
+                                'linear-gradient(135deg, #f0e6ff 0%, #e8d5ff 50%, #dcc5ff 100%)',
+                            }}
+                            initial={{ opacity: 0, scale: 0.8, rotateX: -10 }}
                             whileHover={{
-                              opacity: 1,
-                              scale: 1.15,
+                              opacity: 0.6,
+                              scale: 1.1,
                               rotateX: 0,
                             }}
                             transition={{
@@ -325,13 +391,17 @@ export default function Navbar() {
                             }}
                           />
 
-                          {/* Cinematic scan lines */}
+                          {/* Shimmer effect */}
                           <motion.div
-                            className='absolute inset-0 bg-gradient-to-r from-transparent via-[var(--wd-yellow)]/40 to-transparent -z-10'
-                            initial={{ x: '-100%', opacity: 0, skewX: -15 }}
+                            className='-z-10 absolute inset-0'
+                            style={{
+                              background:
+                                'linear-gradient(45deg, transparent 0%, #ffffff 50%, transparent 100%)',
+                            }}
+                            initial={{ x: '-100%', opacity: 0, skewX: -10 }}
                             whileHover={{
                               x: '100%',
-                              opacity: 1,
+                              opacity: 0.3,
                               skewX: 0,
                               transition: {
                                 duration: 0.8,
@@ -340,13 +410,17 @@ export default function Navbar() {
                             }}
                           />
 
-                          {/* Spotlight effect */}
+                          {/* Soft glow effect */}
                           <motion.div
-                            className='absolute inset-0 bg-gradient-radial from-[var(--wd-yellow)]/20 via-transparent to-transparent rounded-full -z-20'
+                            className='-z-20 absolute inset-0 rounded-full'
+                            style={{
+                              background:
+                                'radial-gradient(circle, #c5a0ff 0%, transparent 70%)',
+                            }}
                             initial={{ opacity: 0, scale: 0.5 }}
                             whileHover={{
-                              opacity: 1,
-                              scale: 2,
+                              opacity: 0.4,
+                              scale: 1.5,
                               transition: { duration: 0.6 },
                             }}
                           />
@@ -356,60 +430,68 @@ export default function Navbar() {
                   })}
                 </div>
 
-                {/* Enhanced decorative elements */}
+                {/* Soft decorative elements */}
                 <motion.div
-                  className='absolute top-1/4 left-8 w-3 h-3 bg-[var(--wd-yellow)] rounded-full'
+                  className='top-1/4 left-8 absolute rounded-full w-2 h-2'
+                  style={{ backgroundColor: '#dcc5ff' }}
                   animate={{
-                    scale: [1, 1.8, 1],
-                    opacity: [0.4, 1, 0.4],
+                    scale: [1, 1.5, 1],
+                    opacity: [0.6, 1, 0.6],
                     rotate: [0, 180, 360],
                   }}
                   transition={{
-                    duration: 3,
+                    duration: 4,
                     repeat: Infinity,
                     ease: 'easeInOut',
                   }}
                 />
                 <motion.div
-                  className='absolute bottom-1/3 right-12 w-4 h-4 bg-[var(--wd-magenta)] rounded-full'
+                  className='right-12 bottom-1/3 absolute rounded-full w-3 h-3'
+                  style={{ backgroundColor: '#f0e6ff' }}
                   animate={{
-                    scale: [1, 1.5, 1],
-                    opacity: [0.3, 0.9, 0.3],
+                    scale: [1, 1.3, 1],
+                    opacity: [0.5, 0.9, 0.5],
                     rotate: [0, -180, -360],
                   }}
                   transition={{
-                    duration: 4,
+                    duration: 5,
                     repeat: Infinity,
                     ease: 'easeInOut',
                     delay: 1.5,
                   }}
                 />
                 <motion.div
-                  className='absolute top-1/3 right-20 w-2 h-2 bg-[var(--wd-plum)] rounded-full'
+                  className='top-1/3 right-20 absolute rounded-full w-1.5 h-1.5'
+                  style={{ backgroundColor: '#c5a0ff' }}
                   animate={{
-                    scale: [1, 2, 1],
-                    opacity: [0.5, 1, 0.5],
+                    scale: [1, 1.8, 1],
+                    opacity: [0.7, 1, 0.7],
                   }}
                   transition={{
-                    duration: 2.5,
+                    duration: 3,
                     repeat: Infinity,
                     ease: 'easeInOut',
                     delay: 0.8,
                   }}
                 />
 
-                {/* Film grain overlay */}
+                {/* Soft texture overlay */}
                 <motion.div
-                  className='absolute inset-0 opacity-[0.03] pointer-events-none mix-blend-overlay'
+                  className='absolute inset-0 pointer-events-none mix-blend-soft-light'
                   style={{
-                    backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
+                    background: `
+                      radial-gradient(circle at 30% 40%, #f0e6ff 0%, transparent 50%),
+                      radial-gradient(circle at 70% 60%, #e8d5ff 0%, transparent 50%),
+                      radial-gradient(circle at 50% 80%, #dcc5ff 0%, transparent 50%)
+                    `,
+                    opacity: 0.3,
                   }}
                   animate={{
-                    opacity: [0.02, 0.04, 0.02],
-                    scale: [1, 1.01, 1],
+                    opacity: [0.2, 0.4, 0.2],
+                    scale: [1, 1.02, 1],
                   }}
                   transition={{
-                    duration: 0.1,
+                    duration: 6,
                     repeat: Infinity,
                     repeatType: 'reverse',
                   }}
