@@ -10,30 +10,31 @@
     --wd-magenta: #EC008C;
     --wd-yellow: #FFF200;
 
-    /* Semantic */
-    --wd-bg: var(--wd-black);
-    --wd-surface: var(--wd-slate);
-    --wd-text: var(--wd-silver);
-    --wd-text-inverse: var(--wd-black);
+    /* Light theme (default) */
+    --wd-bg: #ffffff;
+    --wd-surface: #f6f6f6;
+    --wd-text: #111111;
+    --wd-text-inverse: #ffffff;
     --wd-primary: var(--wd-plum);
     --wd-accent-1: var(--wd-magenta);
     --wd-accent-2: var(--wd-yellow);
 
-    /* Borders (fallback first; override with color-mix where supported) */
+    /* Borders for light theme */
+    --wd-border-alpha: rgba(76, 76, 76, 0.35);
+}
+
+/* Dark theme override via [data-theme="dark"] on <html> or <body> */
+[data-theme="dark"] {
+    --wd-bg: var(--wd-black);
+    --wd-surface: var(--wd-slate);
+    --wd-text: var(--wd-silver);
+    --wd-text-inverse: var(--wd-black);
     --wd-border-alpha: rgba(217, 217, 217, 0.35);
 }
 
-/* Optional light theme override via [data-theme="light"] on <html> or <body> */
-[data-theme="light"] {
-    --wd-bg: #ffffff;
-    --wd-surface: #f6f6f6;
-    --wd-text: #111111;
-    --wd-text-inverse: #111111;
-}
-
-/* Enable dark-first UI */
+/* Enable light-first UI */
 html {
-    color-scheme: dark;
+    color-scheme: light;
 }
 
 body {
@@ -54,7 +55,7 @@ h3,
 h4 {
     font-family: 'Noteworthy', 'Patrick Hand', 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
     line-height: 1.25;
-    color: var(--wd-silver);
+    color: var(--wd-text);
     font-weight: 700;
     letter-spacing: 0.1px;
     margin-top: 1.25em;
@@ -92,7 +93,6 @@ p+p {
     margin-top: 1rem;
 }
 
-
 /* Links */
 a {
     color: var(--wd-magenta);
@@ -101,12 +101,12 @@ a {
 }
 
 a:hover {
-    color: var(--wd-yellow);
+    color: var(--wd-plum);
     text-decoration: underline;
 }
 
 a:focus-visible {
-    outline: 2px solid var(--wd-yellow);
+    outline: 2px solid var(--wd-magenta);
     outline-offset: 2px;
     border-radius: 4px;
 }
@@ -137,17 +137,17 @@ a:focus-visible {
 
 .btn--primary:hover {
     background: var(--wd-plum);
-    color: var(--wd-silver);
+    color: var(--wd-text-inverse);
 }
 
 .btn--secondary {
     background: var(--wd-yellow);
-    color: var(--wd-text-inverse);
+    color: var(--wd-black);
 }
 
 .btn--secondary:hover {
     background: var(--wd-slate);
-    color: var(--wd-silver);
+    color: var(--wd-text-inverse);
 }
 
 .btn--ghost {
@@ -157,8 +157,8 @@ a:focus-visible {
 }
 
 .btn--ghost:hover {
-    color: var(--wd-yellow);
-    border-color: var(--wd-yellow);
+    color: var(--wd-plum);
+    border-color: var(--wd-plum);
 }
 
 /* Cards / Surfaces */
@@ -173,8 +173,8 @@ a:focus-visible {
 input,
 select,
 textarea {
-    background: var(--wd-slate);
-    color: var(--wd-silver);
+    background: var(--wd-surface);
+    color: var(--wd-text);
     border: 1px solid var(--wd-border-alpha);
     border-radius: 8px;
     padding: 0.5rem 0.75rem;
@@ -182,13 +182,18 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-    color: color-mix(in oklab, var(--wd-silver) 60%, transparent);
+    color: color-mix(in oklab, var(--wd-text) 60%, transparent);
 }
 
 @supports not (color: color-mix(in oklab, white, black)) {
 
     input::placeholder,
     textarea::placeholder {
+        color: rgba(17, 17, 17, 0.6);
+    }
+
+    [data-theme="dark"] input::placeholder,
+    [data-theme="dark"] textarea::placeholder {
         color: rgba(217, 217, 217, 0.6);
     }
 }
@@ -196,15 +201,15 @@ textarea::placeholder {
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-    outline: 2px solid var(--wd-yellow);
+    outline: 2px solid var(--wd-magenta);
     outline-offset: 2px;
-    border-color: var(--wd-yellow);
+    border-color: var(--wd-magenta);
 }
 
 /* Icons (works for Phosphor React with .icon or CDN .ph) */
 .icon,
 .ph {
-    color: var(--wd-silver);
+    color: var(--wd-text);
     vertical-align: middle;
 }
 
@@ -212,7 +217,7 @@ a:hover .icon,
 button:hover .icon,
 a:hover .ph,
 button:hover .ph {
-    color: var(--wd-yellow);
+    color: var(--wd-plum);
 }
 
 .btn--primary .icon,
@@ -223,7 +228,7 @@ button:hover .ph {
 /* Selection */
 ::selection {
     background: color-mix(in oklab, var(--wd-magenta) 30%, transparent);
-    color: var(--wd-silver);
+    color: var(--wd-text-inverse);
 }
 
 @supports not (color: color-mix(in oklab, white, black)) {
@@ -299,4 +304,13 @@ dialog[open] {
     src: url('/fonts/MyriadPro-Bold.woff2') format('woff2');
     font-weight: 700;
     font-style: normal;
+}
+
+/* Utility font classes */
+.font-noteworthy {
+    font-family: 'Noteworthy', 'Patrick Hand', 'Caveat', 'Bradley Hand', 'Segoe Print', cursive !important;
+}
+
+.font-myriad {
+    font-family: 'Myriad Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
 }
