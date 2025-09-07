@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     siteName: 'Watchdog Media',
     images: [
       {
-        url: 'https://watchdogmedia.co.za/images/home.jpg',
+        url: 'https://watchdogmedia.co.za/images/wm-logo.svg',
         width: 1200,
         height: 630,
         alt: 'Watchdog Media Home',
