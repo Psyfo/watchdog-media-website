@@ -10,6 +10,99 @@
     --wd-magenta: #EC008C;
     --wd-yellow: #FFF200;
 
+    /* Complete Shade Palettes (Tailwind Style) */
+
+    /* Black Palette */
+    --wd-black-50: #f8f8f8;
+    --wd-black-100: #f0f0f0;
+    --wd-black-200: #e4e4e4;
+    --wd-black-300: #d1d1d1;
+    --wd-black-400: #b4b4b4;
+    --wd-black-500: #9a9a9a;
+    --wd-black-600: #818181;
+    --wd-black-700: #6a6a6a;
+    --wd-black-800: #5a5a5a;
+    --wd-black-900: #4f4f4f;
+    --wd-black-950: #000000;
+
+    /* Slate Palette */
+    --wd-slate-50: #f8f8f8;
+    --wd-slate-100: #f1f1f1;
+    --wd-slate-200: #e6e6e6;
+    --wd-slate-300: #d6d6d6;
+    --wd-slate-400: #b8b8b8;
+    --wd-slate-500: #9d9d9d;
+    --wd-slate-600: #7d7d7d;
+    --wd-slate-700: #676767;
+    --wd-slate-800: #565656;
+    --wd-slate-900: #4c4c4c;
+    --wd-slate-950: #383838;
+
+    /* Silver Palette */
+    --wd-silver-50: #ffffff;
+    --wd-silver-100: #fefefe;
+    --wd-silver-200: #fdfdfd;
+    --wd-silver-300: #f8f8f8;
+    --wd-silver-400: #f0f0f0;
+    --wd-silver-500: #e8e8e8;
+    --wd-silver-600: #d9d9d9;
+    --wd-silver-700: #b8b8b8;
+    --wd-silver-800: #9a9a9a;
+    --wd-silver-900: #7d7d7d;
+    --wd-silver-950: #5a5a5a;
+
+    /* Plum Palette */
+    --wd-plum-50: #fdf4ff;
+    --wd-plum-100: #fae8ff;
+    --wd-plum-200: #f5d0fe;
+    --wd-plum-300: #f0abfc;
+    --wd-plum-400: #e879f9;
+    --wd-plum-500: #d946ef;
+    --wd-plum-600: #c026d3;
+    --wd-plum-700: #a21caf;
+    --wd-plum-800: #86198f;
+    --wd-plum-900: #701a75;
+    --wd-plum-950: #510051;
+
+    /* Magenta Palette */
+    --wd-magenta-50: #fff0f8;
+    --wd-magenta-100: #ffe3f1;
+    --wd-magenta-200: #ffc6e4;
+    --wd-magenta-300: #ff9ad1;
+    --wd-magenta-400: #ff5eb3;
+    --wd-magenta-500: #ff2d92;
+    --wd-magenta-600: #ec008c;
+    --wd-magenta-700: #d6006c;
+    --wd-magenta-800: #b8005a;
+    --wd-magenta-900: #9b0249;
+    --wd-magenta-950: #6b0025;
+
+    /* Yellow Palette */
+    --wd-yellow-50: #fffef0;
+    --wd-yellow-100: #fffdc2;
+    --wd-yellow-200: #fff888;
+    --wd-yellow-300: #fff144;
+    --wd-yellow-400: #ffe711;
+    --wd-yellow-500: #fff200;
+    --wd-yellow-600: #e6d900;
+    --wd-yellow-700: #cc9f00;
+    --wd-yellow-800: #a37c02;
+    --wd-yellow-900: #866508;
+    --wd-yellow-950: #4d3a00;
+
+    /* Lilac Palette (NEW - Soft Gradient System) */
+    --wd-lilac-50: #fefbff;
+    --wd-lilac-100: #f8f4ff;
+    --wd-lilac-200: #f0e6ff;
+    --wd-lilac-300: #e8d5ff;
+    --wd-lilac-400: #dcc5ff;
+    --wd-lilac-500: #d1b3ff;
+    --wd-lilac-600: #c5a0ff;
+    --wd-lilac-700: #b88dff;
+    --wd-lilac-800: #ac7aff;
+    --wd-lilac-900: #9f67ff;
+    --wd-lilac-950: #8b46ff;
+
     /* Light theme (default) */
     --wd-bg: #ffffff;
     --wd-surface: #f6f6f6;
@@ -18,6 +111,23 @@
     --wd-primary: var(--wd-plum);
     --wd-accent-1: var(--wd-magenta);
     --wd-accent-2: var(--wd-yellow);
+    --wd-soft: var(--wd-lilac-400);
+
+    /* Gradient Systems */
+    --wd-gradient-soft: linear-gradient(135deg, var(--wd-lilac-100) 0%, var(--wd-lilac-300) 50%, var(--wd-lilac-500) 100%);
+    --wd-gradient-elegant: linear-gradient(135deg, var(--wd-lilac-50) 0%, var(--wd-lilac-200) 25%, var(--wd-lilac-400) 75%, var(--wd-lilac-600) 100%);
+    --wd-gradient-deep: linear-gradient(135deg, var(--wd-lilac-300) 0%, var(--wd-lilac-600) 50%, var(--wd-lilac-800) 100%);
+
+    /* Mobile Nav Gradient */
+    --wd-gradient-mobile: linear-gradient(135deg,
+            var(--wd-lilac-100) 0%,
+            var(--wd-lilac-200) 15%,
+            var(--wd-lilac-300) 30%,
+            var(--wd-lilac-400) 45%,
+            var(--wd-lilac-500) 60%,
+            var(--wd-lilac-600) 75%,
+            var(--wd-lilac-700) 85%,
+            var(--wd-lilac-800) 100%);
 
     /* Borders for light theme */
     --wd-border-alpha: rgba(76, 76, 76, 0.35);
@@ -150,6 +260,17 @@ a:focus-visible {
     color: var(--wd-text-inverse);
 }
 
+.btn--soft {
+    background: var(--wd-gradient-soft);
+    color: #4a044e;
+    border: 1px solid var(--wd-lilac-300);
+}
+
+.btn--soft:hover {
+    background: var(--wd-gradient-elegant);
+    color: #2d1b2f;
+}
+
 .btn--ghost {
     background: transparent;
     color: var(--wd-magenta);
@@ -169,6 +290,27 @@ a:focus-visible {
     border-radius: 8px;
 }
 
+.card--soft {
+    background: var(--wd-gradient-soft);
+    color: #4a044e;
+    border: 1px solid var(--wd-lilac-300);
+    border-radius: 12px;
+}
+
+/* Overlay Systems */
+.overlay--mobile {
+    background: var(--wd-gradient-mobile);
+    backdrop-filter: blur(20px);
+}
+
+.overlay--modal {
+    background: linear-gradient(135deg,
+            rgba(248, 244, 255, 0.95) 0%,
+            rgba(240, 230, 255, 0.98) 25%,
+            rgba(220, 197, 255, 0.95) 75%,
+            rgba(197, 160, 255, 0.98) 100%);
+}
+
 /* Forms */
 input,
 select,
@@ -178,6 +320,14 @@ textarea {
     border: 1px solid var(--wd-border-alpha);
     border-radius: 8px;
     padding: 0.5rem 0.75rem;
+}
+
+input.soft,
+select.soft,
+textarea.soft {
+    background: var(--wd-lilac-50);
+    border: 1px solid var(--wd-lilac-200);
+    color: #4a044e;
 }
 
 input::placeholder,
@@ -204,6 +354,13 @@ textarea:focus-visible {
     outline: 2px solid var(--wd-magenta);
     outline-offset: 2px;
     border-color: var(--wd-magenta);
+}
+
+input.soft:focus-visible,
+select.soft:focus-visible,
+textarea.soft:focus-visible {
+    outline: 2px solid var(--wd-lilac-600);
+    border-color: var(--wd-lilac-600);
 }
 
 /* Icons (works for Phosphor React with .icon or CDN .ph) */
@@ -268,6 +425,23 @@ dialog[open] {
     clip: rect(0 0 0 0);
     white-space: nowrap;
     border: 0;
+}
+
+/* Gradient utility classes */
+.bg-gradient-soft {
+    background: var(--wd-gradient-soft);
+}
+
+.bg-gradient-elegant {
+    background: var(--wd-gradient-elegant);
+}
+
+.bg-gradient-deep {
+    background: var(--wd-gradient-deep);
+}
+
+.bg-gradient-mobile {
+    background: var(--wd-gradient-mobile);
 }
 
 /* Font faces (kept) */
