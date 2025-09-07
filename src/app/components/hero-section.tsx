@@ -172,7 +172,7 @@ export default function HeroSection() {
           >
             <motion.a
               href='/productions'
-              className='group inline-flex justify-center items-center bg-[var(--wd-magenta)] hover:bg-[var(--wd-plum)] px-8 py-4 rounded-lg font-myriad font-bold !text-white text-lg transition-all duration-300'
+              className='group inline-flex justify-center items-center bg-[var(--wd-magenta)] hover:bg-[var(--wd-plum)] px-8 py-4 rounded-lg font-myriad font-bold !text-[var(--wd-silver)] text-lg transition-all duration-300'
               whileHover={{ scale: 1.05, y: -2 }}
               whileTap={{ scale: 0.98 }}
             >
