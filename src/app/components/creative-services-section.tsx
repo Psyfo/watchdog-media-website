@@ -7,8 +7,8 @@ import React, { useRef } from 'react';
 import {
   ArrowRightIcon,
   CameraIcon,
+  GenderFemaleIcon,
   MegaphoneIcon,
-  UsersIcon,
 } from '@phosphor-icons/react';
 
 const serviceData = [
@@ -27,7 +27,7 @@ const serviceData = [
       'Comprehensive production management from pre-production planning to post-production delivery.',
   },
   {
-    icon: UsersIcon,
+    icon: GenderFemaleIcon,
     iconColor: 'var(--wd-plum)',
     heading: 'Key Crew Services',
     description:
@@ -138,8 +138,8 @@ const CreativeServicesSection: React.FC = () => {
         >
           <div className='bg-gradient-to-r from-[var(--wd-plum)] to-[var(--wd-magenta)] p-1 rounded-2xl'>
             <div className='bg-white p-8 md:p-12 rounded-2xl'>
-              <div className='flex justify-center items-center gap-4 mb-6'>
-                <UsersIcon
+              <div className='flex sm:flex-row flex-col justify-center items-center gap-4 mb-6'>
+                <GenderFemaleIcon
                   size={40}
                   weight='fill'
                   className='text-[var(--wd-magenta)]'
