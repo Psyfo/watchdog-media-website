@@ -27,19 +27,27 @@ export default function HeroSection() {
           sizes='100vw'
           className='object-cover object-[60%_center]'
         />
-        {/* Legibility + brand wash */}
+        {/* Legibility: vertical + left scrim so the headline always reads */}
         <div
           className='absolute inset-0'
           style={{
             background:
-              'linear-gradient(180deg, rgba(8,8,10,0.72) 0%, rgba(8,8,10,0.25) 38%, rgba(8,8,10,0.55) 70%, rgba(8,8,10,0.97) 100%)',
+              'linear-gradient(180deg, rgba(8,8,10,0.78) 0%, rgba(8,8,10,0.32) 40%, rgba(8,8,10,0.6) 72%, rgba(8,8,10,0.98) 100%)',
           }}
         />
+        <div
+          className='absolute inset-0'
+          style={{
+            background:
+              'linear-gradient(90deg, rgba(8,8,10,0.92) 0%, rgba(8,8,10,0.6) 28%, rgba(8,8,10,0.1) 55%, rgba(8,8,10,0) 72%)',
+          }}
+        />
+        {/* Brand wash */}
         <div
           className='absolute inset-0 mix-blend-soft-light'
           style={{
             background:
-              'radial-gradient(80% 60% at 75% 25%, rgba(236,0,140,0.35), transparent 70%)',
+              'radial-gradient(70% 55% at 80% 22%, rgba(236,0,140,0.32), transparent 70%)',
           }}
         />
       </div>
