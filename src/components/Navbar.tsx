@@ -44,28 +44,21 @@ export default function Navbar() {
           <Link
             href='/'
             aria-label={`${site.name} — home`}
-            className='flex items-center gap-2.5'
+            className='group flex items-center gap-2.5'
           >
             <Image
-              src='/images/wm-logo.svg'
+              src='/brand/mark-white.svg'
               alt=''
-              width={36}
+              width={32}
               height={32}
               priority
               unoptimized
-              className='h-8 w-auto'
-              style={{ filter: 'brightness(0) invert(1)', width: 'auto' }}
+              className='h-7 w-7 transition-transform duration-500 group-hover:scale-105 md:h-8 md:w-8'
             />
-            <Image
-              src='/images/wm-logo-text.svg'
-              alt={site.name}
-              width={120}
-              height={36}
-              priority
-              unoptimized
-              className='h-7 w-auto'
-              style={{ filter: 'brightness(0) invert(1)', width: 'auto' }}
-            />
+            <span className='font-display text-lg leading-none tracking-tight text-silver md:text-xl'>
+              Watchdog Media
+              <sup className='ml-0.5 align-super text-[0.5em] text-dim'>™</sup>
+            </span>
           </Link>
 
           {/* Desktop nav */}

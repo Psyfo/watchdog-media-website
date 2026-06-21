@@ -85,23 +85,17 @@ export default function Footer() {
           <div className='col-span-2 lg:col-span-2'>
             <div className='flex items-center gap-2.5'>
               <Image
-                src='/images/wm-logo.svg'
+                src='/brand/mark-white.svg'
                 alt=''
-                width={32}
-                height={28}
+                width={30}
+                height={30}
                 unoptimized
-                className='h-7 w-auto'
-                style={{ filter: 'brightness(0) invert(1)', width: 'auto' }}
+                className='h-7 w-7'
               />
-              <Image
-                src='/images/wm-logo-text.svg'
-                alt={site.name}
-                width={120}
-                height={32}
-                unoptimized
-                className='h-6 w-auto'
-                style={{ filter: 'brightness(0) invert(1)', width: 'auto' }}
-              />
+              <span className='font-display text-lg leading-none tracking-tight text-silver'>
+                Watchdog Media
+                <sup className='ml-0.5 align-super text-[0.5em] text-dim'>™</sup>
+              </span>
             </div>
             <p className='mt-5 max-w-xs text-sm leading-relaxed text-dim'>
               {site.tagline}
