@@ -75,8 +75,8 @@ export default function AboutPage() {
       {/* Cinematic band */}
       <section className='relative h-[42vh] min-h-[320px] w-full overflow-hidden border-b border-white/10'>
         <Image
-          src='/images/wm-hero-monochrome.png'
-          alt='On set with Watchdog Media in KwaZulu-Natal.'
+          src='/images/location-crew.jpg'
+          alt='A Watchdog Media crew sets up a light on location in the KwaZulu-Natal landscape.'
           fill
           sizes='100vw'
           className='object-cover object-center'

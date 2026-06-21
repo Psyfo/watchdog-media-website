@@ -19,6 +19,7 @@ import Container from '@/components/ui/Container';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
+import ImageBand from '@/components/ui/ImageBand';
 import { services, formats, site } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -61,6 +62,13 @@ export default function ServicesPage() {
             ))}
           </div>
         }
+      />
+
+      <ImageBand
+        src='/images/bts-director.jpg'
+        alt='A director and crew at work on a lit interior set.'
+        heightClass='h-[50vh] min-h-[320px]'
+        position='center'
       />
 
       {services.map((s, i) => {

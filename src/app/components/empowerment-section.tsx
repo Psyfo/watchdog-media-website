@@ -1,5 +1,7 @@
 'use client';
 
+import Image from 'next/image';
+
 import Container from '@/components/ui/Container';
 import Reveal from '@/components/ui/Reveal';
 import Kicker from '@/components/ui/Kicker';
@@ -18,13 +20,28 @@ export default function EmpowermentSection() {
         }}
       />
       <Container size='wide' className='relative'>
-        <div className='grid gap-12 lg:grid-cols-12'>
-          <div className='lg:col-span-6'>
+        <div className='grid gap-12 lg:grid-cols-12 lg:gap-16'>
+          {/* Image */}
+          <Reveal className='lg:col-span-5'>
+            <div className='relative aspect-[4/5] overflow-hidden border border-white/10'>
+              <Image
+                src='/images/woman-operator.jpg'
+                alt='A camera operator frames a shot through a cinema camera.'
+                fill
+                sizes='(max-width: 1024px) 100vw, 42vw'
+                className='object-cover'
+              />
+              <div className='absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-transparent' />
+            </div>
+          </Reveal>
+
+          {/* Content */}
+          <div className='lg:col-span-7'>
             <Reveal>
               <Kicker>Our commitment</Kicker>
             </Reveal>
             <Reveal delay={0.05}>
-              <h2 className='mt-6 text-balance text-4xl leading-[1.05] md:text-6xl'>
+              <h2 className='mt-6 text-balance text-4xl leading-[1.05] md:text-5xl'>
                 Women, championed{' '}
                 <span className='font-light italic text-magenta'>
                   on and off
@@ -33,17 +50,15 @@ export default function EmpowermentSection() {
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className='mt-7 max-w-md text-lg leading-relaxed text-dim'>
+              <p className='mt-6 max-w-xl text-lg leading-relaxed text-dim'>
                 Empowerment is not a campaign line for us — it&rsquo;s the way we
                 staff a set. We build pathways for women and underrepresented
                 crew, credit them visibly, and tell their stories with consent
                 and care.
               </p>
             </Reveal>
-          </div>
 
-          <div className='lg:col-span-6'>
-            <div className='grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2'>
+            <div className='mt-10 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2'>
               {values.map((v, i) => (
                 <Reveal key={v.title} delay={i * 0.06} className='bg-ink-2 p-7'>
                   <h3 className='font-display text-xl text-silver'>{v.title}</h3>
