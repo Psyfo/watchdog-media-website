@@ -27,13 +27,34 @@ women's empowerment on- and off-camera.
 
 ## Logo
 
-- The mark and wordmark render **monochrome white** on the dark base
-  (`filter: brightness(0) invert(1)`). The plum mark is reserved for light
-  contexts (print, light-background partners).
-- Clear space: at least the height of the "W" on all sides.
-- Minimum size: digital ≥ 24 px height; print ≥ 10 mm height.
-- Don't: distort, add effects, place on low-contrast or busy backgrounds, or
-  alter proportions.
+The mark is a **negative-space watchdog** — a disc with the dog's profile carved
+from it. The 2026 system cleans it to a true circle and splits it into reusable
+parts. All assets live in [`public/brand/`](./public/brand) (see the brand-pack
+README there).
+
+### Parts
+
+- **Mark** — the disc + dog. The dog is transparent negative space, so it reads
+  on any background. Variants: `mark-white`, `mark-black`, `mark-plum`,
+  `mark-magenta`.
+- **Badge** — a self-contained circle with the dog as a solid positive shape.
+  Use where the background is busy or unknown (favicon, avatar, app icon).
+  Variants: `badge-gradient` (magenta→plum, primary), `badge-magenta`,
+  `badge-plum`, `badge-ink`.
+- **Wordmark** — "Watchdog Media™" set in **Fraunces** (the display face). On the
+  site it is live type (themeable); a vector lockup ships in the brand pack.
+- **Lockup** — mark + wordmark, horizontal. The default site lockup is the white
+  mark with the Fraunces wordmark.
+
+### Application
+
+- On dark: white mark or the gradient/ink badge. On light: black or plum mark.
+- **Favicon / app icon** = `badge-gradient` → `src/app/icon.svg`, `favicon.ico`,
+  `apple-icon.png`. Social avatar: `public/brand/avatar-512.png`.
+- Clear space: at least the height of the dog's ear on all sides.
+- Minimum size: mark ≥ 20 px; badge favicon down to 16 px (verified legible).
+- Don't: distort, recolour outside the palette, add effects, or place the
+  transparent **mark** on a busy photo (use the **badge** instead).
 
 ## Colour System
 
