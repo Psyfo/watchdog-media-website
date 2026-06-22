@@ -4,6 +4,7 @@ import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
 import FounderFeature from '@/components/FounderFeature';
+import FilmsSection from '@/components/FilmsSection';
 import { pageMeta } from '@/lib/seo';
 import { people, productions } from '@/lib/site';
 
@@ -32,17 +33,20 @@ export default function PeoplePage() {
       {/* Founder */}
       <FounderFeature />
 
+      {/* Films */}
+      <FilmsSection />
+
       {/* Team grid */}
       <section className='border-b border-t border-white/10 bg-ink py-24 md:py-32'>
         <Container size='wide'>
           <Reveal>
-            <Kicker index='01'>Key crew</Kicker>
+            <Kicker index='02'>Key crew</Kicker>
           </Reveal>
-          <div className='mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2'>
+          <div className='mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3'>
             {people.map((person, i) => (
               <Reveal
                 key={person.name}
-                delay={(i % 2) * 0.08}
+                delay={(i % 3) * 0.06}
                 className='group bg-ink p-8'
               >
                 <div className='flex items-center gap-4'>
@@ -99,7 +103,7 @@ export default function PeoplePage() {
       <section className='bg-ink py-24'>
         <Container size='wide'>
           <Reveal>
-            <Kicker index='02'>Directors we&rsquo;ve backed</Kicker>
+            <Kicker index='03'>Directors we&rsquo;ve backed</Kicker>
           </Reveal>
           <ul className='mt-10 border-t border-white/10'>
             {productions.map((p, i) => (

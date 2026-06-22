@@ -6,17 +6,42 @@ import { useEffect, useState } from 'react';
 import {
   InstagramLogoIcon,
   LinkedinLogoIcon,
-  YoutubeLogoIcon,
+  XLogoIcon,
   ArrowUpRightIcon,
 } from '@phosphor-icons/react';
 
 import Container from '@/components/ui/Container';
 import { footerNav, site } from '@/lib/site';
 
+// Phosphor has no Vimeo glyph in this version — small brand-accurate fill icon,
+// prop-shaped to match the Phosphor icons used alongside it.
+function VimeoLogoIcon({
+  size = 18,
+  className,
+}: {
+  size?: number;
+  weight?: string;
+  className?: string;
+}) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox='0 0 24 24'
+      fill='currentColor'
+      className={className}
+      aria-hidden='true'
+    >
+      <path d='M23.9765 6.4168c-.105 2.338-1.739 5.5397-4.894 9.6027-3.2625 4.2425-6.0265 6.3635-8.2925 6.3635-1.4035 0-2.5905-1.296-3.5625-3.8895l-1.9435-7.1277c-.7215-2.5935-1.4955-3.8895-2.3245-3.8895-.18 0-.81.3795-1.8915 1.1377L0 7.4651c1.205-1.0605 2.394-2.121 3.5685-3.18 1.6155-1.395 2.8275-2.13 3.6345-2.205 1.9095-.18 3.0855 1.125 3.5265 3.915.4785 3.015.81 4.8885.9975 5.6205.5625 2.5635 1.1805 3.8445 1.857 3.8445.525 0 1.314-.8295 2.367-2.4885 1.05-1.659 1.6125-2.9205 1.6875-3.7905.15-1.425-.4125-2.1405-1.6875-2.1405-.6 0-1.218.135-1.8525.405 1.2285-4.0245 3.576-5.9895 7.0395-5.8845 2.5695.075 3.7815 1.7385 3.639 4.9905z' />
+    </svg>
+  );
+}
+
 const socialIcons = {
   instagram: InstagramLogoIcon,
+  vimeo: VimeoLogoIcon,
   linkedin: LinkedinLogoIcon,
-  youtube: YoutubeLogoIcon,
+  x: XLogoIcon,
 } as const;
 
 function LinkColumn({
@@ -160,7 +185,13 @@ export default function Footer() {
                     aria-label={s.label}
                     className='text-dim transition-colors hover:text-magenta'
                   >
-                    <Icon size={18} weight='fill' />
+                    {Icon ? (
+                      <Icon size={18} weight='fill' />
+                    ) : (
+                      <span className='wd-mono text-xs font-medium uppercase tracking-wider'>
+                        {s.label}
+                      </span>
+                    )}
                   </a>
                 );
               })}

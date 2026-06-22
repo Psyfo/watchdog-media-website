@@ -7,6 +7,18 @@
  * come from the supplied key art.
  */
 
+/**
+ * Base URL for canonicals, sitemap, OG/Twitter images and JSON-LD.
+ * Priority: explicit override (set NEXT_PUBLIC_SITE_URL=https://watchdogmedia.co.za
+ * once the domain is live) → the current Vercel production deployment (so previews
+ * and *.vercel.app render OG/canonical correctly) → the intended domain as fallback.
+ */
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'https://watchdogmedia.co.za');
+
 export const site = {
   name: 'Watchdog Media',
   legalName: 'Watchdog Media (Pty) Limited',
@@ -14,7 +26,7 @@ export const site = {
   description:
     'Watchdog Media is a Durban-based film production support and creative company telling courageous, craft-driven stories across KwaZulu-Natal — championing women on and off camera.',
   founded: 2016,
-  url: 'https://watchdogmedia.co.za',
+  url: SITE_URL,
   email: 'info@watchdogmedia.co.za',
   phone: '+27 (0)31 123 4567',
   phoneHref: '+27311234567',
@@ -24,10 +36,14 @@ export const site = {
     line3: 'South Africa, 3652',
   },
   region: 'KwaZulu-Natal, South Africa',
+  // Watchdog Media isn't a unique global handle, and Palesa is the brand —
+  // so these are the founder's personal, verified profiles.
   socials: [
-    { label: 'Instagram', handle: '@watchdogmedia', href: 'https://instagram.com/watchdogmedia', icon: 'instagram' },
-    { label: 'LinkedIn', handle: 'Watchdog Media', href: 'https://www.linkedin.com/company/watchdog-media-za', icon: 'linkedin' },
-    { label: 'YouTube', handle: 'Watchdog Media', href: 'https://www.youtube.com/@watchdogmedia', icon: 'youtube' },
+    { label: 'Instagram', handle: '@palesalebona', href: 'https://www.instagram.com/palesalebona/', icon: 'instagram' },
+    { label: 'Vimeo', handle: 'Palesa Lebona', href: 'https://vimeo.com/palesalebona', icon: 'vimeo' },
+    { label: 'LinkedIn', handle: 'Palesa Lebona', href: 'https://www.linkedin.com/in/palesalebona/', icon: 'linkedin' },
+    { label: 'X', handle: '@mspalesalebona', href: 'https://x.com/mspalesalebona', icon: 'x' },
+    { label: 'IMDb', handle: 'Palesa Lebona', href: 'https://www.imdb.com/name/nm6586690/', icon: 'imdb' },
   ],
 } as const;
 
@@ -233,6 +249,30 @@ export const productions: Production[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/* Films — the founder's public Vimeo work (vimeo.com/palesalebona)             */
+/* -------------------------------------------------------------------------- */
+
+export interface Film {
+  title: string;
+  kind: string;
+  year: string;
+  duration: string;
+  durationISO: string;
+  uploadDate: string;
+  url: string;
+  thumb: string;
+}
+
+export const films: Film[] = [
+  { title: 'Palesa Lebona — Reel', kind: 'Showreel', year: '2017', duration: '1:36', durationISO: 'PT1M36S', uploadDate: '2017-10-14', url: 'https://vimeo.com/238169091', thumb: '/images/films/238169091.jpg' },
+  { title: 'Women in the Film Industry', kind: 'Documentary', year: '2020', duration: '2:53', durationISO: 'PT2M53S', uploadDate: '2020-07-03', url: 'https://vimeo.com/435063913', thumb: '/images/films/435063913.jpg' },
+  { title: 'Cream', kind: 'Short film · Trailer', year: '2017', duration: '0:37', durationISO: 'PT37S', uploadDate: '2017-02-04', url: 'https://vimeo.com/202574564', thumb: '/images/films/202574564.jpg' },
+  { title: 'Slumber Party', kind: 'Trailer', year: '2019', duration: '0:45', durationISO: 'PT45S', uploadDate: '2019-03-18', url: 'https://vimeo.com/325045987', thumb: '/images/films/325045987.jpg' },
+  { title: 'Holier than Thou', kind: 'Short film', year: '2016', duration: '4:13', durationISO: 'PT4M13S', uploadDate: '2016-01-19', url: 'https://vimeo.com/152372312', thumb: '/images/films/152372312.jpg' },
+  { title: 'Bun in the Oven', kind: 'Music video', year: '2014', duration: '4:20', durationISO: 'PT4M20S', uploadDate: '2014-02-20', url: 'https://vimeo.com/87222835', thumb: '/images/films/87222835.jpg' },
+];
+
+/* -------------------------------------------------------------------------- */
 /* Founder                                                                     */
 /* -------------------------------------------------------------------------- */
 
@@ -283,6 +323,27 @@ export const people: Person[] = [
     focus: 'Digital · Systems',
     initials: 'SM',
     bio: "The multi-hyphenate who builds the platforms, sharpens the strategy and quietly saves the day — turning the vision into working systems and the odd impossible deadline. Family, not just crew.",
+  },
+  {
+    name: 'Thandeka Mbeki',
+    role: 'Producer',
+    focus: 'Schedules · Delivery',
+    initials: 'TM',
+    bio: 'Turns ambition into a workable plan — schedules, budgets and a vetted heads-of-department roster, ready on day one.',
+  },
+  {
+    name: 'Bongani Dlamini',
+    role: 'Director of Photography',
+    focus: 'Camera · Light',
+    initials: 'BD',
+    bio: 'Shapes the cinematic contrast Watchdog is known for, from misted interiors to KwaZulu-Natal golden hour.',
+  },
+  {
+    name: 'Naledi Khoza',
+    role: 'Post & Edit',
+    focus: 'Edit · Colour',
+    initials: 'NK',
+    bio: 'Finds the film in the footage — pacing, rhythm and a final grade that makes every frame earn its place.',
   },
 ];
 
