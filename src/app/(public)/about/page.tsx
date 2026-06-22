@@ -6,6 +6,7 @@ import Reveal from '@/components/ui/Reveal';
 import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
+import FounderFeature from '@/components/FounderFeature';
 import { site, stats, values } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -71,6 +72,9 @@ export default function AboutPage() {
           </div>
         </Container>
       </section>
+
+      {/* Founder */}
+      <FounderFeature compact />
 
       {/* Cinematic band */}
       <section className='relative h-[42vh] min-h-[320px] w-full overflow-hidden border-b border-white/10'>

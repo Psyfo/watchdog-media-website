@@ -5,6 +5,7 @@ import Reveal from '@/components/ui/Reveal';
 import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
+import FounderFeature from '@/components/FounderFeature';
 import { people, productions } from '@/lib/site';
 
 export const metadata: Metadata = {
@@ -28,11 +29,14 @@ export default function PeoplePage() {
         lead='Leaders and heads of department who pair filmmaker instinct with operational discipline. More than half of our department heads are women — by design, not by accident.'
       />
 
+      {/* Founder */}
+      <FounderFeature />
+
       {/* Team grid */}
-      <section className='border-b border-white/10 bg-ink py-24 md:py-32'>
+      <section className='border-b border-t border-white/10 bg-ink py-24 md:py-32'>
         <Container size='wide'>
           <Reveal>
-            <Kicker index='01'>Leadership &amp; key crew</Kicker>
+            <Kicker index='01'>Key crew</Kicker>
           </Reveal>
           <div className='mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3'>
             {people.map((person, i) => (
