@@ -233,6 +233,31 @@ export const productions: Production[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/* Founder                                                                     */
+/* -------------------------------------------------------------------------- */
+
+export const founder = {
+  name: 'Palesa Lebona',
+  role: 'Founder · Director · Producer',
+  initials: 'PL',
+  photo: '/images/palesa-lebona.jpg',
+  short:
+    'A director, producer and writer telling stories that provoke thought and spark dialogue about the human issues we too often overlook.',
+  bio: [
+    'Palesa Lebona founded Watchdog Media to tell courageous, craft-driven stories — work that entertains, but also provokes thought and drives dialogue about the human issues society tends to overlook.',
+    'A South African director, producer and writer, she earned an MFA in Filmmaking from the New York Film Academy — graduating with honours — alongside a BCom in Marketing and a postgraduate qualification in logistics. It is a rare blend of artist-grade vision and corporate-grade rigour, and it shapes the way Watchdog works.',
+    'In 2024 she was selected for the Durban FilmMart with Taste Buds, and she remains a vocal champion of women in film — on and off the camera.',
+  ],
+  socials: [
+    { label: 'Vimeo', href: 'https://vimeo.com/palesalebona' },
+    { label: 'IMDb', href: 'https://www.imdb.com/name/nm6586690/' },
+    { label: 'Instagram', href: 'https://www.instagram.com/palesalebona/' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/palesalebona/' },
+    { label: 'X', href: 'https://x.com/mspalesalebona' },
+  ],
+} as const;
+
+/* -------------------------------------------------------------------------- */
 /* People                                                                      */
 /* -------------------------------------------------------------------------- */
 
@@ -245,13 +270,6 @@ export interface Person {
 }
 
 export const people: Person[] = [
-  {
-    name: 'Nandi Khumalo',
-    role: 'Founder & Creative Director',
-    focus: 'Vision · Direction',
-    initials: 'NK',
-    bio: 'Durban-born director who built Watchdog to prove corporate reliability and auteur vision belong on the same call sheet.',
-  },
   {
     name: 'Thandeka Mbeki',
     role: 'Head of Production',
