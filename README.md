@@ -1,36 +1,77 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Watchdog Media — Website
 
-## Getting Started
+Marketing site for Watchdog Media (Pty) Ltd — a Durban-based film production
+support and creative company. Built around a **cinematic editorial dark**
+design system.
 
-First, run the development server:
+- **Framework:** Next.js 16 (App Router, Turbopack) · React 19 · TypeScript
+- **Styling:** Tailwind CSS v4 (`@theme`) + custom design tokens
+- **Type:** Fraunces (display) · Myriad Pro (body, local) · DM Mono (labels)
+- **Motion:** Framer Motion (deliberate, reduced-motion aware)
+- **Secrets/deploy:** Doppler · Vercel
+
+See [`BRAND.md`](./BRAND.md) for the design system and
+[`OVERHAUL.md`](./OVERHAUL.md) for the redesign rationale and scope.
+
+## Getting started
+
+Secrets live in Doppler (project `watchdog-media-website`). Run through Doppler
+so env vars are injected:
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+doppler run -- npm run dev      # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Plain `npm run dev` also works — the contact form just falls back to logging
+submissions to the console (see below). See [`.env.example`](./.env.example)
+for the variable shape.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build      # production build (the quality gate — must pass before push)
+npm run start      # serve the production build
+npm run lint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Project structure
 
-## Learn More
+```
+src/
+  app/
+    (public)/            # routes: home, about, services, productions,
+                         #         people, awards, contact, privacy, terms,
+                         #         accessibility
+    components/          # home-page section components
+    api/contact/route.ts # contact form handler (SMTP + console fallback)
+    layout.tsx           # fonts, metadata, grain, skip link
+    not-found.tsx        # styled 404
+  components/
+    ui/                  # Container, Section, Reveal, Kicker, Button, PageHeader
+    Navbar.tsx, Footer.tsx, ProductionCard.tsx
+  lib/site.ts            # SINGLE SOURCE OF TRUTH for content + links
+  styles/globals.css     # design tokens (@theme), base, utilities
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Editing content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Almost everything — nav, services, productions, people, awards, press, contact
+details and footer link groups — lives in **`src/lib/site.ts`**. Footer and page
+links are derived from this data, so they never go stale or dead. Production key
+art lives in `public/images/poster-*.png`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contact form & email
 
-## Deploy on Vercel
+`src/app/api/contact/route.ts` is a provider-agnostic SMTP handler.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- **ZeptoMail (intended):** set `MAIL_HOST=smtp.zeptomail.com`,
+  `MAIL_USER=emailapikey`, `MAIL_PASSWORD=<send-mail token>`,
+  `MAIL_FROM_EMAIL=<verified sender>`. Optionally `MAIL_TO` for the destination
+  inbox.
+- **No/failed mail config:** the submission is logged to the server console as
+  JSON and the request still succeeds, so dev/preview never blocks.
+- Server-side validation, input sanitising and a honeypot are built in.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Deploys through **Vercel** (git integration). Production secrets come from the
+Doppler `prd` config. Image optimisation runs on Vercel for the poster/hero
+PNGs.

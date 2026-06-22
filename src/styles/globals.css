@@ -1,490 +1,380 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
-/* Brand design tokens */
+/*
+  Watchdog Media — "Cinematic Editorial Dark"
+  Dark-first design system. See BRAND.md.
+*/
+
+/* ----------------------------------------------------------------------------
+   Tailwind v4 theme — registers brand colours/fonts as utilities
+   (bg-ink, text-magenta, font-display, etc.)
+---------------------------------------------------------------------------- */
+@theme {
+  /* Surfaces */
+  --color-ink: #08080a;
+  --color-ink-2: #0d0d11;
+  --color-ink-3: #141418;
+  --color-ink-4: #1c1c22;
+
+  /* Text */
+  --color-silver: #eceaef;
+  --color-dim: #a4a1aa;
+  --color-faint: #6f6c75;
+
+  /* Brand accents */
+  --color-magenta: #ec008c;
+  --color-magenta-bright: #ff2d92;
+  --color-plum: #510051;
+  --color-plum-2: #7a1f7a;
+  --color-plum-3: #a21caf;
+  --color-yellow: #fff200;
+  --color-lilac: #c5a0ff;
+
+  /* Fonts (next/font sets the underlying vars on <html>) */
+  --font-display: var(--font-fraunces), 'Fraunces', Georgia, 'Times New Roman',
+    serif;
+  --font-body: 'Myriad Pro', var(--font-inter), 'Segoe UI', Roboto, Helvetica,
+    Arial, sans-serif;
+  --font-mono: var(--font-dm-mono), 'DM Mono', ui-monospace, 'SFMono-Regular',
+    Menlo, monospace;
+  --font-script: 'Noteworthy', 'Patrick Hand', cursive;
+}
+
+/* ----------------------------------------------------------------------------
+   Brand palette (kept for gradients, email parity, ad-hoc use)
+---------------------------------------------------------------------------- */
 :root {
-    /* Core palette */
-    --wd-black: #000000;
-    --wd-slate: #4C4C4C;
-    --wd-plum: #510051;
-    --wd-silver: #D9D9D9;
-    --wd-magenta: #EC008C;
-    --wd-yellow: #FFF200;
+  --wd-black: #08080a;
+  --wd-slate: #4c4c4c;
+  --wd-plum: #510051;
+  --wd-silver: #d9d9d9;
+  --wd-magenta: #ec008c;
+  --wd-yellow: #fff200;
 
-    /* Complete Shade Palettes (Tailwind Style) */
+  --wd-plum-300: #f0abfc;
+  --wd-plum-400: #e879f9;
+  --wd-plum-500: #d946ef;
+  --wd-plum-600: #c026d3;
+  --wd-plum-700: #a21caf;
+  --wd-plum-800: #86198f;
+  --wd-plum-900: #701a75;
+  --wd-plum-950: #510051;
 
-    /* Black Palette */
-    --wd-black-50: #f8f8f8;
-    --wd-black-100: #f0f0f0;
-    --wd-black-200: #e4e4e4;
-    --wd-black-300: #d1d1d1;
-    --wd-black-400: #b4b4b4;
-    --wd-black-500: #9a9a9a;
-    --wd-black-600: #818181;
-    --wd-black-700: #6a6a6a;
-    --wd-black-800: #5a5a5a;
-    --wd-black-900: #4f4f4f;
-    --wd-black-950: #000000;
+  --wd-magenta-300: #ff9ad1;
+  --wd-magenta-400: #ff5eb3;
+  --wd-magenta-500: #ff2d92;
+  --wd-magenta-600: #ec008c;
+  --wd-magenta-700: #d6006c;
 
-    /* Slate Palette */
-    --wd-slate-50: #f8f8f8;
-    --wd-slate-100: #f1f1f1;
-    --wd-slate-200: #e6e6e6;
-    --wd-slate-300: #d6d6d6;
-    --wd-slate-400: #b8b8b8;
-    --wd-slate-500: #9d9d9d;
-    --wd-slate-600: #7d7d7d;
-    --wd-slate-700: #676767;
-    --wd-slate-800: #565656;
-    --wd-slate-900: #4c4c4c;
-    --wd-slate-950: #383838;
+  --wd-yellow-300: #fff144;
+  --wd-yellow-400: #ffe711;
+  --wd-yellow-500: #fff200;
 
-    /* Silver Palette */
-    --wd-silver-50: #ffffff;
-    --wd-silver-100: #fefefe;
-    --wd-silver-200: #fdfdfd;
-    --wd-silver-300: #f8f8f8;
-    --wd-silver-400: #f0f0f0;
-    --wd-silver-500: #e8e8e8;
-    --wd-silver-600: #d9d9d9;
-    --wd-silver-700: #b8b8b8;
-    --wd-silver-800: #9a9a9a;
-    --wd-silver-900: #7d7d7d;
-    --wd-silver-950: #5a5a5a;
+  --wd-lilac-300: #e8d5ff;
+  --wd-lilac-400: #dcc5ff;
+  --wd-lilac-500: #d1b3ff;
+  --wd-lilac-600: #c5a0ff;
 
-    /* Plum Palette */
-    --wd-plum-50: #fdf4ff;
-    --wd-plum-100: #fae8ff;
-    --wd-plum-200: #f5d0fe;
-    --wd-plum-300: #f0abfc;
-    --wd-plum-400: #e879f9;
-    --wd-plum-500: #d946ef;
-    --wd-plum-600: #c026d3;
-    --wd-plum-700: #a21caf;
-    --wd-plum-800: #86198f;
-    --wd-plum-900: #701a75;
-    --wd-plum-950: #510051;
+  /* Lines */
+  --wd-line: rgba(236, 234, 239, 0.1);
+  --wd-line-strong: rgba(236, 234, 239, 0.22);
 
-    /* Magenta Palette */
-    --wd-magenta-50: #fff0f8;
-    --wd-magenta-100: #ffe3f1;
-    --wd-magenta-200: #ffc6e4;
-    --wd-magenta-300: #ff9ad1;
-    --wd-magenta-400: #ff5eb3;
-    --wd-magenta-500: #ff2d92;
-    --wd-magenta-600: #ec008c;
-    --wd-magenta-700: #d6006c;
-    --wd-magenta-800: #b8005a;
-    --wd-magenta-900: #9b0249;
-    --wd-magenta-950: #6b0025;
+  /* Selection / focus */
+  --wd-focus: #fff200;
 
-    /* Yellow Palette */
-    --wd-yellow-50: #fffef0;
-    --wd-yellow-100: #fffdc2;
-    --wd-yellow-200: #fff888;
-    --wd-yellow-300: #fff144;
-    --wd-yellow-400: #ffe711;
-    --wd-yellow-500: #fff200;
-    --wd-yellow-600: #e6d900;
-    --wd-yellow-700: #cc9f00;
-    --wd-yellow-800: #a37c02;
-    --wd-yellow-900: #866508;
-    --wd-yellow-950: #4d3a00;
-
-    /* Lilac Palette (NEW - Soft Gradient System) */
-    --wd-lilac-50: #fefbff;
-    --wd-lilac-100: #f8f4ff;
-    --wd-lilac-200: #f0e6ff;
-    --wd-lilac-300: #e8d5ff;
-    --wd-lilac-400: #dcc5ff;
-    --wd-lilac-500: #d1b3ff;
-    --wd-lilac-600: #c5a0ff;
-    --wd-lilac-700: #b88dff;
-    --wd-lilac-800: #ac7aff;
-    --wd-lilac-900: #9f67ff;
-    --wd-lilac-950: #8b46ff;
-
-    /* Light theme (default) */
-    --wd-bg: #ffffff;
-    --wd-surface: #f6f6f6;
-    --wd-text: #111111;
-    --wd-text-inverse: #ffffff;
-    --wd-primary: var(--wd-plum);
-    --wd-accent-1: var(--wd-magenta);
-    --wd-accent-2: var(--wd-yellow);
-    --wd-soft: var(--wd-lilac-400);
-
-    /* Gradient Systems */
-    --wd-gradient-soft: linear-gradient(135deg, var(--wd-lilac-100) 0%, var(--wd-lilac-300) 50%, var(--wd-lilac-500) 100%);
-    --wd-gradient-elegant: linear-gradient(135deg, var(--wd-lilac-50) 0%, var(--wd-lilac-200) 25%, var(--wd-lilac-400) 75%, var(--wd-lilac-600) 100%);
-    --wd-gradient-deep: linear-gradient(135deg, var(--wd-lilac-300) 0%, var(--wd-lilac-600) 50%, var(--wd-lilac-800) 100%);
-
-    /* Mobile Nav Gradient */
-    --wd-gradient-mobile: linear-gradient(135deg,
-            var(--wd-lilac-100) 0%,
-            var(--wd-lilac-200) 15%,
-            var(--wd-lilac-300) 30%,
-            var(--wd-lilac-400) 45%,
-            var(--wd-lilac-500) 60%,
-            var(--wd-lilac-600) 75%,
-            var(--wd-lilac-700) 85%,
-            var(--wd-lilac-800) 100%);
-
-    /* Borders for light theme */
-    --wd-border-alpha: rgba(76, 76, 76, 0.35);
+  color-scheme: dark;
 }
 
-/* Dark theme override via [data-theme="dark"] on <html> or <body> */
-[data-theme="dark"] {
-    --wd-bg: var(--wd-black);
-    --wd-surface: var(--wd-slate);
-    --wd-text: var(--wd-silver);
-    --wd-text-inverse: var(--wd-black);
-    --wd-border-alpha: rgba(217, 217, 217, 0.35);
+/* ----------------------------------------------------------------------------
+   Base
+---------------------------------------------------------------------------- */
+* {
+  border-color: var(--wd-line);
 }
 
-/* Enable light-first UI */
 html {
-    color-scheme: light;
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  background: var(--color-ink);
 }
 
 body {
-    background: var(--wd-bg);
-    color: var(--wd-text);
-    font-family: 'Myriad Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.5;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  background: var(--color-ink);
+  color: var(--color-silver);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
-/* Type scale aligned to BRAND.md */
 h1,
 h2,
 h3,
-h4 {
-    font-family: 'Noteworthy', 'Patrick Hand', 'Caveat', 'Bradley Hand', 'Segoe Print', cursive;
-    line-height: 1.25;
-    color: var(--wd-text);
-    font-weight: 700;
-    letter-spacing: 0.1px;
-    margin-top: 1.25em;
-    margin-bottom: 0.5em;
+h4,
+h5 {
+  font-family: var(--font-display);
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  color: var(--color-silver);
+  font-weight: 600;
+  text-wrap: balance;
 }
 
-h1 {
-    font-size: clamp(3rem, 6vw, 4rem);
+p {
+  text-wrap: pretty;
 }
 
-/* 48–64px */
-h2 {
-    font-size: clamp(2.25rem, 4vw, 3rem);
+/* Editorial eyebrow / kicker */
+.wd-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--color-magenta);
 }
 
-/* 36–48px */
-h3 {
-    font-size: 1.75rem;
+.wd-mono {
+  font-family: var(--font-mono);
 }
 
-/* 28px */
-h4 {
-    font-size: 1.375rem;
-}
-
-/* 22px */
-small {
-    font-size: 0.875rem;
-    line-height: 1.4;
-}
-
-/* 14px */
-
-p+p {
-    margin-top: 1rem;
+.wd-script {
+  font-family: var(--font-script);
 }
 
 /* Links */
 a {
-    color: var(--wd-magenta);
-    text-underline-offset: 3px;
-    text-decoration-thickness: 2px;
+  color: inherit;
+  text-decoration: none;
+  text-underline-offset: 3px;
 }
 
-a:hover {
-    color: var(--wd-plum);
-    text-decoration: underline;
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--wd-focus);
+  outline-offset: 3px;
+  border-radius: 2px;
 }
 
-a:focus-visible {
-    outline: 2px solid var(--wd-magenta);
-    outline-offset: 2px;
-    border-radius: 4px;
+::selection {
+  background: var(--color-magenta);
+  color: #fff;
 }
 
-/* Buttons (utility classes for non-Tailwind elements) */
-.button,
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.625rem 1rem;
-    border-radius: 8px;
-    border: 1px solid transparent;
-    font-weight: 600;
-    line-height: 1.2;
-    cursor: pointer;
-    transition: background-color .2s ease, color .2s ease, border-color .2s ease, transform .05s ease;
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a31;
+  border-radius: 999px;
+  border: 2px solid var(--color-ink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-plum-3);
 }
 
-.btn:active {
-    transform: translateY(1px);
-}
-
-.btn--primary {
-    background: var(--wd-magenta);
-    color: var(--wd-text-inverse);
-}
-
-.btn--primary:hover {
-    background: var(--wd-plum);
-    color: var(--wd-text-inverse);
-}
-
-.btn--secondary {
-    background: var(--wd-yellow);
-    color: var(--wd-black);
-}
-
-.btn--secondary:hover {
-    background: var(--wd-slate);
-    color: var(--wd-text-inverse);
-}
-
-.btn--soft {
-    background: var(--wd-gradient-soft);
-    color: #4a044e;
-    border: 1px solid var(--wd-lilac-300);
-}
-
-.btn--soft:hover {
-    background: var(--wd-gradient-elegant);
-    color: #2d1b2f;
-}
-
-.btn--ghost {
-    background: transparent;
-    color: var(--wd-magenta);
-    border-color: var(--wd-border-alpha);
-}
-
-.btn--ghost:hover {
-    color: var(--wd-plum);
-    border-color: var(--wd-plum);
-}
-
-/* Cards / Surfaces */
-.card {
-    background: var(--wd-surface);
-    color: var(--wd-text);
-    border: 1px solid var(--wd-border-alpha);
-    border-radius: 8px;
-}
-
-.card--soft {
-    background: var(--wd-gradient-soft);
-    color: #4a044e;
-    border: 1px solid var(--wd-lilac-300);
-    border-radius: 12px;
-}
-
-/* Overlay Systems */
-.overlay--mobile {
-    background: var(--wd-gradient-mobile);
-    backdrop-filter: blur(20px);
-}
-
-.overlay--modal {
-    background: linear-gradient(135deg,
-            rgba(248, 244, 255, 0.95) 0%,
-            rgba(240, 230, 255, 0.98) 25%,
-            rgba(220, 197, 255, 0.95) 75%,
-            rgba(197, 160, 255, 0.98) 100%);
-}
-
-/* Forms */
+/* ----------------------------------------------------------------------------
+   Forms
+---------------------------------------------------------------------------- */
 input,
 select,
 textarea {
-    background: var(--wd-surface);
-    color: var(--wd-text);
-    border: 1px solid var(--wd-border-alpha);
-    border-radius: 8px;
-    padding: 0.5rem 0.75rem;
-}
-
-input.soft,
-select.soft,
-textarea.soft {
-    background: var(--wd-lilac-50);
-    border: 1px solid var(--wd-lilac-200);
-    color: #4a044e;
+  font-family: var(--font-body);
+  background: var(--color-ink-2);
+  color: var(--color-silver);
+  border: 1px solid var(--wd-line-strong);
+  border-radius: 2px;
 }
 
 input::placeholder,
 textarea::placeholder {
-    color: color-mix(in oklab, var(--wd-text) 60%, transparent);
-}
-
-@supports not (color: color-mix(in oklab, white, black)) {
-
-    input::placeholder,
-    textarea::placeholder {
-        color: rgba(17, 17, 17, 0.6);
-    }
-
-    [data-theme="dark"] input::placeholder,
-    [data-theme="dark"] textarea::placeholder {
-        color: rgba(217, 217, 217, 0.6);
-    }
+  color: var(--color-faint);
 }
 
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-    outline: 2px solid var(--wd-magenta);
-    outline-offset: 2px;
-    border-color: var(--wd-magenta);
+  outline: none;
+  border-color: var(--color-magenta);
+  box-shadow: 0 0 0 1px var(--color-magenta);
 }
 
-input.soft:focus-visible,
-select.soft:focus-visible,
-textarea.soft:focus-visible {
-    outline: 2px solid var(--wd-lilac-600);
-    border-color: var(--wd-lilac-600);
+/* ----------------------------------------------------------------------------
+   Film grain + vignette overlays
+---------------------------------------------------------------------------- */
+.wd-grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-/* Icons (works for Phosphor React with .icon or CDN .ph) */
-.icon,
-.ph {
-    color: var(--wd-text);
-    vertical-align: middle;
+/* Hairline rule */
+.wd-rule {
+  height: 1px;
+  width: 100%;
+  background: var(--wd-line);
 }
 
-a:hover .icon,
-button:hover .icon,
-a:hover .ph,
-button:hover .ph {
-    color: var(--wd-plum);
+/* Marquee */
+@keyframes wd-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.wd-marquee-track {
+  display: inline-flex;
+  white-space: nowrap;
+  will-change: transform;
+  animation: wd-marquee 38s linear infinite;
+}
+.wd-marquee:hover .wd-marquee-track {
+  animation-play-state: paused;
 }
 
-.btn--primary .icon,
-.btn--primary .ph {
-    color: var(--wd-text-inverse);
-}
-
-/* Selection */
-::selection {
-    background: color-mix(in oklab, var(--wd-magenta) 30%, transparent);
-    color: var(--wd-text-inverse);
-}
-
-@supports not (color: color-mix(in oklab, white, black)) {
-    ::selection {
-        background: rgba(236, 0, 140, 0.3);
-        color: #fff;
-    }
-}
-
-/* Dialog base (keeps your previous behavior) */
-dialog {
-    all: unset;
-    display: none;
-    background: var(--wd-surface);
-    color: var(--wd-text);
-    border: 1px solid var(--wd-border-alpha);
-    border-radius: 12px;
-    padding: 1rem;
-}
-
-dialog[open] {
-    display: flex;
-}
-
-/* Utilities */
+/* Utility */
 .no-scroll {
-    overflow: hidden;
+  overflow: hidden;
 }
 
 .visually-hidden {
-    position: absolute !important;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0 0 0 0);
-    white-space: nowrap;
-    border: 0;
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
 }
 
-/* Gradient utility classes */
-.bg-gradient-soft {
-    background: var(--wd-gradient-soft);
+/* Long-form prose (legal / info pages) */
+.wd-prose {
+  color: var(--color-dim);
+  font-size: 1rem;
+  line-height: 1.75;
+}
+.wd-prose h2 {
+  font-size: 1.6rem;
+  color: var(--color-silver);
+  margin: 2.75rem 0 1rem;
+}
+.wd-prose h3 {
+  font-size: 1.2rem;
+  color: var(--color-silver);
+  margin: 2rem 0 0.6rem;
+}
+.wd-prose p {
+  margin: 0 0 1.1rem;
+}
+.wd-prose a {
+  color: var(--color-magenta);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.wd-prose ul {
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+}
+.wd-prose li {
+  position: relative;
+  padding-left: 1.4rem;
+  margin-bottom: 0.6rem;
+}
+.wd-prose li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.65rem;
+  width: 6px;
+  height: 6px;
+  background: var(--color-magenta);
+}
+.wd-prose strong {
+  color: var(--color-silver);
+  font-weight: 600;
 }
 
-.bg-gradient-elegant {
-    background: var(--wd-gradient-elegant);
+/* Skip link */
+.wd-skip {
+  position: fixed;
+  top: -100px;
+  left: 1rem;
+  z-index: 100;
+  background: var(--color-yellow);
+  color: #000;
+  padding: 0.6rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: top 0.2s ease;
+}
+.wd-skip:focus {
+  top: 1rem;
 }
 
-.bg-gradient-deep {
-    background: var(--wd-gradient-deep);
+/* ----------------------------------------------------------------------------
+   Reduced motion
+---------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .wd-marquee-track {
+    animation: none;
+  }
 }
 
-.bg-gradient-mobile {
-    background: var(--wd-gradient-mobile);
-}
-
-/* Font faces (kept) */
+/* ----------------------------------------------------------------------------
+   Local fonts
+---------------------------------------------------------------------------- */
 @font-face {
-    font-family: 'Noteworthy';
-    src: url('/fonts/Noteworthy-Light.woff2') format('woff2');
-    font-weight: 300;
-    font-style: normal;
+  font-family: 'Myriad Pro';
+  src: url('/fonts/MyriadPro-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
-    font-family: 'Noteworthy';
-    src: url('/fonts/Noteworthy.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
+  font-family: 'Myriad Pro';
+  src: url('/fonts/MyriadPro-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
-    font-family: 'Noteworthy';
-    src: url('/fonts/Noteworthy-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
+  font-family: 'Noteworthy';
+  src: url('/fonts/Noteworthy-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
 }
-
 @font-face {
-    font-family: 'Myriad Pro';
-    src: url('/fonts/MyriadPro-Regular.woff2') format('woff2');
-    font-weight: 400;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'Myriad Pro';
-    src: url('/fonts/MyriadPro-Bold.woff2') format('woff2');
-    font-weight: 700;
-    font-style: normal;
-}
-
-/* Utility font classes */
-.font-noteworthy {
-    font-family: 'Noteworthy', 'Patrick Hand', 'Caveat', 'Bradley Hand', 'Segoe Print', cursive !important;
-}
-
-.font-myriad {
-    font-family: 'Myriad Pro', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif !important;
+  font-family: 'Noteworthy';
+  src: url('/fonts/Noteworthy-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }

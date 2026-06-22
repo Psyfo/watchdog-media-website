@@ -1,312 +1,104 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable react/no-unescaped-entities */
 'use client';
-import { motion, useInView, Variants } from 'framer-motion';
-import React, { useRef } from 'react';
 
-import { ClipboardIcon, PackageIcon, PlayIcon } from '@phosphor-icons/react';
+import Container from '@/components/ui/Container';
+import Reveal from '@/components/ui/Reveal';
+import SectionHeading from '@/components/ui/SectionHeading';
+import Button from '@/components/ui/Button';
+import { formats } from '@/lib/site';
 
-const serviceData = [
+const steps = [
   {
-    icon: ClipboardIcon,
-    iconColor: 'var(--wd-yellow-600)',
-    gradientFrom: 'var(--wd-yellow-50)',
-    gradientTo: 'var(--wd-yellow-100)',
-    borderColor: 'var(--wd-yellow-200)',
-    textColor: 'var(--wd-yellow-900)',
-    heading: 'Needs Analysis',
-    description:
-      'Discuss the film production requirements, schedule and budget.',
+    n: '01',
+    title: 'Needs Analysis',
+    body: 'We map the production requirements, schedule and budget — and the risks before they become problems.',
   },
   {
-    icon: PackageIcon,
-    iconColor: 'var(--wd-magenta-600)',
-    gradientFrom: 'var(--wd-magenta-50)',
-    gradientTo: 'var(--wd-magenta-100)',
-    borderColor: 'var(--wd-magenta-200)',
-    textColor: 'var(--wd-magenta-900)',
-    heading: 'Niche Package',
-    description:
-      'Create a unique package of production support services based on filming needs',
+    n: '02',
+    title: 'Niche Package',
+    body: 'A bespoke package of production support services, assembled around exactly what your shoot needs.',
   },
   {
-    icon: PlayIcon,
-    iconColor: 'var(--wd-plum-600)',
-    gradientFrom: 'var(--wd-plum-50)',
-    gradientTo: 'var(--wd-plum-100)',
-    borderColor: 'var(--wd-plum-200)',
-    textColor: 'var(--wd-plum-900)',
-    heading: 'Execution',
-    description:
-      'Providing and managing all film production support during filming',
+    n: '03',
+    title: 'Execution',
+    body: 'We provide and manage every logistical element on the ground, from first recce through final wrap.',
   },
 ];
 
-const FilmSupportSection: React.FC = () => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: '-100px' });
-
-  const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.4,
-      },
-    },
-  };
-
-  const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 80, scale: 0.8, rotateX: -15 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      rotateX: 0,
-      transition: {
-        type: 'spring',
-        stiffness: 100,
-        damping: 15,
-        duration: 1.2,
-      },
-    },
-  };
-
+export default function ProductionSupportSection() {
   return (
-    <section
-      ref={ref}
-      className='relative flex flex-col items-center bg-[var(--wd-surface)] px-6 py-20 md:py-32 overflow-hidden text-center'
-    >
-      {/* Soft Background with Lilac */}
-      <div
-        className='absolute inset-0 opacity-8'
-        style={{
-          background: `
-            radial-gradient(circle at 30% 20%, var(--wd-lilac-100) 0%, transparent 60%),
-            radial-gradient(circle at 70% 80%, var(--wd-lilac-200) 0%, transparent 60%),
-            linear-gradient(45deg, var(--wd-lilac-50) 0%, transparent 70%)
-          `,
-        }}
-      />
-
-      <div className='z-10 relative mx-auto max-w-6xl'>
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 80 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 80 }}
-          transition={{
-            duration: 1.2,
-            ease: [0.25, 0.46, 0.45, 0.94],
-            type: 'spring',
-            stiffness: 100,
-            damping: 20,
-          }}
-          className='mb-16'
-        >
-          <h2 className='mb-6 font-noteworthy font-bold text-[var(--wd-text)] text-4xl md:text-5xl lg:text-6xl leading-tight'>
-            Film Production{' '}
-            <motion.span
-              className='text-[var(--wd-magenta-600)]'
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={
-                isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
-              }
-              transition={{ duration: 0.8, delay: 0.3 }}
-            >
-              Support
-            </motion.span>
-          </h2>
-          <p className='mx-auto max-w-4xl font-myriad text-[var(--wd-slate-700)] text-lg md:text-xl leading-relaxed'>
-            <span className='font-semibold text-[var(--wd-plum-700)]'>
-              Watchdog Media
-            </span>{' '}
-            provides and manages the key logistical elements of your film
-            production to ensure that both your crew and cast experience a
-            smooth, seamlessly executed film shoot in{' '}
-            <span className='font-semibold text-[var(--wd-magenta-600)]'>
-              Durban
-            </span>{' '}
-            and other areas of{' '}
-            <span className='font-semibold text-[var(--wd-magenta-600)]'>
-              KwaZulu-Natal, South Africa
-            </span>
-            .
-          </p>
-        </motion.div>
-
-        {/* Services Info */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8, y: 60 }}
-          animate={
-            isInView
-              ? { opacity: 1, scale: 1, y: 0 }
-              : { opacity: 0, scale: 0.8, y: 60 }
+    <section className='relative border-t border-white/10 bg-ink-2 py-24 md:py-36'>
+      <Container size='wide'>
+        <SectionHeading
+          kicker='Production support'
+          index='02'
+          title={
+            <>
+              The logistical backbone
+              <br />
+              of your shoot.
+            </>
           }
-          transition={{
-            duration: 1,
-            delay: 0.2,
-            ease: 'easeOut',
-            type: 'spring',
-            stiffness: 120,
-            damping: 20,
-          }}
-          className='mb-16'
-        >
-          <div
-            className='backdrop-blur-sm p-8 md:p-12 border rounded-2xl'
-            style={{
-              background:
-                'linear-gradient(135deg, var(--wd-lilac-50) 0%, var(--wd-lilac-100) 100%)',
-              borderColor: 'var(--wd-lilac-200)',
-            }}
-          >
-            <h3 className='mb-8 font-noteworthy font-bold text-[var(--wd-text)] text-2xl md:text-3xl'>
-              Our Production Support Services span across:
-            </h3>
-            <div className='gap-6 grid grid-cols-1 md:grid-cols-3'>
-              <motion.div
-                className='flex items-center gap-4 hover:shadow-lg p-4 border rounded-xl transition-all duration-300'
-                style={{
-                  background:
-                    'linear-gradient(135deg, var(--wd-magenta-50) 0%, var(--wd-plum-50) 100%)',
-                  borderColor: 'var(--wd-magenta-200)',
-                }}
-                whileHover={{ scale: 1.02, y: -2 }}
-              >
-                <div className='text-3xl'>🎬</div>
-                <div className='text-left'>
-                  <div className='font-myriad font-bold text-[var(--wd-text)]'>
-                    Live Action
-                  </div>
-                  <div className='font-myriad text-[var(--wd-slate-600)] text-sm'>
-                    Shorts and Features
-                  </div>
-                </div>
-              </motion.div>
+          lead='Watchdog Media provides and manages the key logistical elements of your production so cast and crew experience a smooth, seamlessly executed shoot in Durban and across KwaZulu-Natal.'
+        />
 
-              <motion.div
-                className='flex items-center gap-4 hover:shadow-lg p-4 border rounded-xl transition-all duration-300'
-                style={{
-                  background:
-                    'linear-gradient(135deg, var(--wd-yellow-50) 0%, var(--wd-magenta-50) 100%)',
-                  borderColor: 'var(--wd-yellow-200)',
-                }}
-                whileHover={{ scale: 1.02, y: -2 }}
-              >
-                <div className='text-3xl'>🎥</div>
-                <div className='text-left'>
-                  <div className='font-myriad font-bold text-[var(--wd-text)]'>
-                    Documentaries
-                  </div>
-                  <div className='font-myriad text-[var(--wd-slate-600)] text-sm'>
-                    Shorts and Features
-                  </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                className='flex items-center gap-4 hover:shadow-lg p-4 border rounded-xl transition-all duration-300'
-                style={{
-                  background:
-                    'linear-gradient(135deg, var(--wd-plum-50) 0%, var(--wd-yellow-50) 100%)',
-                  borderColor: 'var(--wd-plum-200)',
-                }}
-                whileHover={{ scale: 1.02, y: -2 }}
-              >
-                <div className='text-3xl'>🛠️</div>
-                <div className='text-left'>
-                  <div className='font-myriad font-bold text-[var(--wd-text)]'>
-                    Skills Shows
-                  </div>
-                  <div className='font-myriad text-[var(--wd-slate-600)] text-sm'>
-                    Cooking, DIY, etc.
-                  </div>
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* Service Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial='hidden'
-          animate={isInView ? 'visible' : 'hidden'}
-          className='gap-8 grid grid-cols-1 md:grid-cols-3 mb-16 w-full'
-        >
-          {serviceData.map((service, idx) => (
-            <motion.div key={service.heading} variants={itemVariants}>
-              <div
-                className='group hover:shadow-xl backdrop-blur-sm p-8 border rounded-2xl h-full transition-all duration-500'
-                style={{
-                  background: `linear-gradient(135deg, ${service.gradientFrom} 0%, ${service.gradientTo} 100%)`,
-                  borderColor: service.borderColor,
-                }}
-              >
-                <div className='flex flex-col items-center h-full text-center'>
-                  <motion.div
-                    className='mb-6 p-4 rounded-xl transition-transform duration-300'
-                    style={{
-                      background:
-                        'linear-gradient(135deg, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.6) 100%)',
-                    }}
-                    whileHover={{ scale: 1.15, rotate: 5 }}
-                  >
-                    <service.icon
-                      size={48}
-                      weight='fill'
-                      style={{ color: service.iconColor }}
-                    />
-                  </motion.div>
-                  <h3 className='mb-4 font-noteworthy font-bold text-[var(--wd-text)] text-xl md:text-2xl'>
-                    {service.heading}
-                  </h3>
-                  <p
-                    className='flex-grow font-myriad text-base leading-relaxed'
-                    style={{ color: service.textColor }}
-                  >
-                    {service.description}
-                  </p>
-                </div>
-              </div>
-            </motion.div>
+        {/* Process */}
+        <div className='mt-16 grid gap-px overflow-hidden border border-white/10 bg-white/10 md:grid-cols-3'>
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 0.08} className='group bg-ink-2 p-8 md:p-10'>
+              <span className='font-display text-5xl text-white/10 transition-colors duration-500 group-hover:text-magenta/40'>
+                {s.n}
+              </span>
+              <h3 className='mt-6 text-2xl'>{s.title}</h3>
+              <p className='mt-3 text-sm leading-relaxed text-dim'>{s.body}</p>
+            </Reveal>
           ))}
-        </motion.div>
+        </div>
 
-        {/* Closing Statement */}
-        <motion.div
-          initial={{ opacity: 0, y: 60, scale: 0.9 }}
-          animate={
-            isInView
-              ? { opacity: 1, y: 0, scale: 1 }
-              : { opacity: 0, y: 60, scale: 0.9 }
-          }
-          transition={{
-            duration: 1,
-            delay: 0.8,
-            ease: 'easeOut',
-            type: 'spring',
-            stiffness: 120,
-            damping: 20,
-          }}
-          className='flex flex-col items-center mx-auto max-w-xl text-center'
-        >
-          <div
-            className='shadow-xl p-8 rounded-2xl'
-            style={{
-              background:
-                'linear-gradient(135deg, var(--wd-magenta-600) 0%, var(--wd-plum-600) 100%)',
-            }}
-          >
-            <p className='font-noteworthy font-bold text-white text-xl md:text-2xl leading-relaxed'>
-              "The Wishbone for KZN film production support services."
-            </p>
-          </div>
-        </motion.div>
-      </div>
+        {/* Formats + quote */}
+        <div className='mt-16 grid items-center gap-12 lg:grid-cols-2'>
+          <Reveal>
+            <p className='wd-kicker'>Our support spans across</p>
+            <ul className='mt-6 divide-y divide-white/10 border-y border-white/10'>
+              {formats.map((f) => (
+                <li
+                  key={f.title}
+                  className='flex items-baseline justify-between py-4'
+                >
+                  <span className='font-display text-xl text-silver'>
+                    {f.title}
+                  </span>
+                  <span className='wd-mono text-xs uppercase tracking-wider text-faint'>
+                    {f.note}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Reveal>
+
+          <Reveal delay={0.1}>
+            <figure className='relative border border-white/10 bg-ink p-10 md:p-12'>
+              <span
+                aria-hidden
+                className='absolute left-6 top-3 font-display text-7xl leading-none text-magenta/30'
+              >
+                &ldquo;
+              </span>
+              <blockquote className='relative font-display text-2xl italic leading-snug text-silver md:text-3xl'>
+                The Wishbone for KZN film production support services.
+              </blockquote>
+              <figcaption className='mt-6 wd-mono text-xs uppercase tracking-widest text-faint'>
+                — The Watchdog promise
+              </figcaption>
+            </figure>
+          </Reveal>
+        </div>
+
+        <Reveal delay={0.1} className='mt-14'>
+          <Button href='/services' variant='ghost' arrow>
+            Explore all services
+          </Button>
+        </Reveal>
+      </Container>
     </section>
   );
-};
-
-export default FilmSupportSection;
+}

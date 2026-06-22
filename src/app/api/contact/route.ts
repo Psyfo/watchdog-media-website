@@ -1,7 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
 
-// import { ratelimit } from '@/lib/ratelimit'; // Optional: Add rate limiting
+/**
+ * Contact endpoint — provider-agnostic SMTP.
+ *
+ * Works with ZeptoMail out of the box: set
+ *   MAIL_HOST=smtp.zeptomail.com   (or smtp.zeptomail.eu / .in for your region)
+ *   MAIL_PORT=587
+ *   MAIL_USER=emailapikey
+ *   MAIL_PASSWORD=<ZeptoMail "Send Mail" token>
+ *   MAIL_FROM_EMAIL=<a verified domain sender>
+ *   MAIL_FROM_NAME=Watchdog Media
+ *   MAIL_TO=<inbox that should receive enquiries>   (defaults to MAIL_FROM_EMAIL)
+ *
+ * If mail isn't configured (or a send fails) the submission is logged to the
+ * server console as JSON and the request still succeeds — so local/preview
+ * never blocks on infrastructure we don't have yet.
+ */
 
 const {
   MAIL_HOST,
@@ -11,234 +26,176 @@ const {
   MAIL_PASSWORD,
   MAIL_FROM_NAME,
   MAIL_FROM_EMAIL,
+  MAIL_TO,
 } = process.env;
 
-// Validation functions
-function validateName(name: string): string | null {
-  if (!name || typeof name !== 'string') return 'Name is required';
-  const trimmed = name.trim();
-  if (trimmed.length < 2) return 'Name must be at least 2 characters';
-  if (trimmed.length > 50) return 'Name must be less than 50 characters';
-  if (!/^[a-zA-Z\s'-]+$/.test(trimmed))
-    return 'Name contains invalid characters';
+const FROM_NAME = MAIL_FROM_NAME || 'Watchdog Media';
+const TO_ADDRESS = MAIL_TO || MAIL_FROM_EMAIL;
+
+function validateName(v: unknown): string | null {
+  if (typeof v !== 'string') return 'Name is required';
+  const t = v.trim();
+  if (t.length < 2) return 'Name must be at least 2 characters';
+  if (t.length > 60) return 'Name must be under 60 characters';
+  if (!/^[\p{L}\s'.-]+$/u.test(t)) return 'Name contains invalid characters';
   return null;
 }
 
-function validateEmail(email: string): string | null {
-  if (!email || typeof email !== 'string') return 'Email is required';
-  const trimmed = email.trim();
-  if (trimmed.length > 254) return 'Email address is too long';
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!emailRegex.test(trimmed)) return 'Please enter a valid email address';
+function validateEmail(v: unknown): string | null {
+  if (typeof v !== 'string') return 'Email is required';
+  const t = v.trim();
+  if (t.length > 254) return 'Email is too long';
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(t)) return 'Email is invalid';
   return null;
 }
 
-function validateMessage(message: string): string | null {
-  if (!message || typeof message !== 'string') return 'Message is required';
-  const trimmed = message.trim();
-  if (trimmed.length < 10) return 'Message must be at least 10 characters';
-  if (trimmed.length > 1000) return 'Message must be less than 1000 characters';
+function validateMessage(v: unknown): string | null {
+  if (typeof v !== 'string') return 'Message is required';
+  const t = v.trim();
+  if (t.length < 10) return 'Message must be at least 10 characters';
+  if (t.length > 1500) return 'Message must be under 1500 characters';
   return null;
 }
 
-function sanitizeInput(input: string): string {
+function clean(input: string): string {
   return input.trim().replace(/[<>]/g, '');
 }
 
-function brandMailTemplate({
-  name,
-  email,
-  message,
-}: {
-  name: string;
-  email: string;
-  message: string;
-}) {
-  return `
-    <div style="background:linear-gradient(135deg,#f8f4ff 0%,#ece0fa 100%);padding:2rem;border-radius:1.5rem;font-family:'Myriad Pro',Arial,sans-serif;color:#2d1a3a;max-width:600px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:2rem;">
-        <h1 style="font-family:'Noteworthy',cursive;font-size:2.5rem;color:#ec008c;margin:0;">Watchdog Media</h1>
-        <p style="color:#a47aff;margin:0.5rem 0 0 0;">New Contact Request</p>
-      </div>
-      
-      <div style="background:#fff;border-radius:1rem;padding:2rem;margin-bottom:1.5rem;border:1px solid #e0c7fa;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-        <h2 style="color:#ec008c;margin-top:0;font-size:1.5rem;">Contact Details</h2>
-        <div style="margin-bottom:1rem;">
-          <strong style="color:#510051;">Name:</strong> ${sanitizeInput(name)}
-        </div>
-        <div style="margin-bottom:1rem;">
-          <strong style="color:#510051;">Email:</strong> <a href="mailto:${email}" style="color:#ec008c;">${email}</a>
-        </div>
-        <div>
-          <strong style="color:#510051;">Message:</strong>
-          <div style="background:#f8f4ff;padding:1rem;border-radius:0.5rem;margin-top:0.5rem;white-space:pre-line;line-height:1.6;">
-            ${sanitizeInput(message)}
-          </div>
-        </div>
-      </div>
-      
-      <footer style="text-align:center;font-size:0.9rem;color:#a47aff;">
-        <strong>Watchdog Media</strong><br/>
-        <span style="color:#ec008c;">Corporate-grade reliability. Artist-grade vision.</span><br/>
-        <small style="color:#9ca3af;">Received: ${new Date().toLocaleString(
-          'en-ZA',
-          { timeZone: 'Africa/Johannesburg' }
-        )}</small>
-      </footer>
-    </div>
-  `;
+function escapeHtml(s: string): string {
+  return s
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-function confirmationMailTemplate({ name }: { name: string }) {
+interface Submission {
+  name: string;
+  email: string;
+  project: string;
+  message: string;
+}
+
+function notificationEmail({ name, email, project, message }: Submission) {
+  const received = new Date().toLocaleString('en-ZA', {
+    timeZone: 'Africa/Johannesburg',
+  });
   return `
-    <div style="background:linear-gradient(135deg,#f8f4ff 0%,#ece0fa 100%);padding:2rem;border-radius:1.5rem;font-family:'Myriad Pro',Arial,sans-serif;color:#2d1a3a;max-width:600px;margin:0 auto;">
-      <div style="text-align:center;margin-bottom:2rem;">
-        <h1 style="font-family:'Noteworthy',cursive;font-size:2.5rem;color:#ec008c;margin:0;">Watchdog Media</h1>
-        <p style="color:#a47aff;margin:0.5rem 0 0 0;">Thank you for reaching out!</p>
-      </div>
-      
-      <div style="background:#fff;border-radius:1rem;padding:2rem;margin-bottom:1.5rem;border:1px solid #e0c7fa;box-shadow:0 4px 6px rgba(0,0,0,0.1);">
-        <h2 style="color:#ec008c;margin-top:0;">Hi ${sanitizeInput(
-          name
-        )}! 👋</h2>
-        <p style="line-height:1.6;margin-bottom:1rem;">
-          Thank you for contacting <strong style="color:#ec008c;">Watchdog Media</strong>. We've received your message and will review it promptly.
-        </p>
-        <p style="line-height:1.6;margin-bottom:1rem;">
-          Our team typically responds within <strong>24 hours</strong> during business days. We're excited to learn more about your project and explore how we can bring your vision to life.
-        </p>
-        <div style="background:#f8f4ff;padding:1rem;border-radius:0.5rem;border-left:4px solid #ec008c;">
-          <strong style="color:#510051;">What happens next?</strong><br/>
-          <small style="color:#6b7280;">• We'll review your message<br/>• Schedule a consultation if needed<br/>• Provide a detailed proposal</small>
-        </div>
-      </div>
-      
-      <footer style="text-align:center;font-size:0.9rem;color:#a47aff;">
-        <strong>Watchdog Media</strong><br/>
-        <span style="color:#ec008c;">Corporate-grade reliability. Artist-grade vision.</span><br/>
-        <small style="color:#9ca3af;">17 Howick Drive, Waterfall, Durban, KZN 3652</small>
-      </footer>
+  <div style="background:#08080a;padding:32px;font-family:Helvetica,Arial,sans-serif;color:#eceaef;">
+    <div style="max-width:560px;margin:0 auto;">
+      <p style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#ec008c;margin:0 0 6px;">New enquiry</p>
+      <h1 style="font-family:Georgia,serif;font-size:30px;color:#ffffff;margin:0 0 24px;">Watchdog Media</h1>
+      <table style="width:100%;border-collapse:collapse;background:#0d0d11;border:1px solid #222;">
+        <tr><td style="padding:16px;border-bottom:1px solid #1c1c22;width:120px;color:#6f6c75;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Name</td><td style="padding:16px;border-bottom:1px solid #1c1c22;color:#eceaef;">${escapeHtml(name)}</td></tr>
+        <tr><td style="padding:16px;border-bottom:1px solid #1c1c22;color:#6f6c75;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Email</td><td style="padding:16px;border-bottom:1px solid #1c1c22;"><a href="mailto:${encodeURIComponent(email)}" style="color:#ec008c;">${escapeHtml(email)}</a></td></tr>
+        <tr><td style="padding:16px;border-bottom:1px solid #1c1c22;color:#6f6c75;font-size:11px;text-transform:uppercase;letter-spacing:.1em;">Interest</td><td style="padding:16px;border-bottom:1px solid #1c1c22;color:#eceaef;">${escapeHtml(project) || '—'}</td></tr>
+        <tr><td style="padding:16px;color:#6f6c75;font-size:11px;text-transform:uppercase;letter-spacing:.1em;vertical-align:top;">Message</td><td style="padding:16px;color:#eceaef;white-space:pre-line;line-height:1.6;">${escapeHtml(message)}</td></tr>
+      </table>
+      <p style="color:#6f6c75;font-size:12px;margin-top:16px;">Received ${received} (SAST)</p>
     </div>
-  `;
+  </div>`;
+}
+
+function confirmationEmail(name: string) {
+  return `
+  <div style="background:#08080a;padding:32px;font-family:Helvetica,Arial,sans-serif;color:#eceaef;">
+    <div style="max-width:560px;margin:0 auto;">
+      <h1 style="font-family:Georgia,serif;font-size:30px;color:#ffffff;margin:0 0 8px;">Watchdog Media</h1>
+      <p style="font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#ec008c;margin:0 0 24px;">Corporate-grade reliability. Artist-grade vision.</p>
+      <div style="background:#0d0d11;border:1px solid #222;padding:28px;">
+        <p style="margin:0 0 16px;line-height:1.6;">Hi ${escapeHtml(name)},</p>
+        <p style="margin:0 0 16px;line-height:1.6;color:#a4a1aa;">Thank you for reaching out. Your message has landed with our team and we typically reply within one business day.</p>
+        <p style="margin:0;line-height:1.6;color:#a4a1aa;">In the meantime, if anything is time-sensitive, just call the studio.</p>
+      </div>
+      <p style="color:#6f6c75;font-size:12px;margin-top:20px;">17 Howick Drive, Waterfall · Durban · KwaZulu-Natal</p>
+    </div>
+  </div>`;
 }
 
 export async function POST(req: NextRequest) {
+  let body: Record<string, unknown>;
   try {
-    // Optional: Rate limiting (implement if needed)
-    // const identifier = req.ip ?? "127.0.0.1";
-    // const { success } = await ratelimit.limit(identifier);
-    // if (!success) {
-    //   return NextResponse.json({ success: false, error: "Too many requests. Please try again later." }, { status: 429 });
-    // }
+    body = await req.json();
+  } catch {
+    return NextResponse.json(
+      { success: false, error: 'Invalid request.' },
+      { status: 400 }
+    );
+  }
 
-    const body = await req.json();
-    const { name, email, message } = body;
+  // Honeypot — silently accept and drop bot submissions.
+  if (typeof body.company === 'string' && body.company.trim() !== '') {
+    return NextResponse.json({ success: true });
+  }
 
-    // Validate all fields
-    const nameError = validateName(name);
-    if (nameError) {
-      return NextResponse.json(
-        { success: false, error: nameError },
-        { status: 400 }
-      );
-    }
+  const nameError = validateName(body.name);
+  const emailError = validateEmail(body.email);
+  const messageError = validateMessage(body.message);
+  const firstError = nameError || emailError || messageError;
+  if (firstError) {
+    return NextResponse.json(
+      { success: false, error: firstError },
+      { status: 400 }
+    );
+  }
 
-    const emailError = validateEmail(email);
-    if (emailError) {
-      return NextResponse.json(
-        { success: false, error: emailError },
-        { status: 400 }
-      );
-    }
+  const submission: Submission = {
+    name: clean(body.name as string),
+    email: (body.email as string).trim().toLowerCase(),
+    project:
+      typeof body.project === 'string' ? clean(body.project).slice(0, 80) : '',
+    message: clean(body.message as string),
+  };
 
-    const messageError = validateMessage(message);
-    if (messageError) {
-      return NextResponse.json(
-        { success: false, error: messageError },
-        { status: 400 }
-      );
-    }
+  const configured = Boolean(
+    MAIL_HOST && MAIL_USER && MAIL_PASSWORD && MAIL_FROM_EMAIL && TO_ADDRESS
+  );
 
-    // Check required environment variables
-    if (!MAIL_HOST || !MAIL_USER || !MAIL_PASSWORD || !MAIL_FROM_EMAIL) {
-      console.error('Missing email configuration');
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            'Email service is temporarily unavailable. Please try again later.',
-        },
-        { status: 500 }
-      );
-    }
+  if (!configured) {
+    // No mail provider wired up yet — capture the lead in the server log.
+    console.log(
+      '[contact] mail not configured — submission captured:\n' +
+        JSON.stringify({ ...submission, receivedAt: new Date().toISOString() }, null, 2)
+    );
+    return NextResponse.json({ success: true });
+  }
 
-    // Create transporter
+  try {
     const transporter = nodemailer.createTransport({
       host: MAIL_HOST,
       port: Number(MAIL_PORT) || 587,
       secure: MAIL_SECURE === 'true',
-      auth: {
-        user: MAIL_USER,
-        pass: MAIL_PASSWORD,
-      },
+      auth: { user: MAIL_USER, pass: MAIL_PASSWORD },
     });
 
-    // Verify transporter configuration
+    await transporter.sendMail({
+      from: `"${FROM_NAME}" <${MAIL_FROM_EMAIL}>`,
+      to: TO_ADDRESS,
+      replyTo: submission.email,
+      subject: `New enquiry from ${submission.name}${submission.project ? ` — ${submission.project}` : ''}`,
+      html: notificationEmail(submission),
+    });
+
+    // Confirmation to the sender — best effort, never fail the request on it.
     try {
-      await transporter.verify();
-    } catch (verifyError) {
-      console.error('SMTP verification failed:', verifyError);
-      return NextResponse.json(
-        {
-          success: false,
-          error:
-            'Email service is temporarily unavailable. Please try again later.',
-        },
-        { status: 500 }
-      );
+      await transporter.sendMail({
+        from: `"${FROM_NAME}" <${MAIL_FROM_EMAIL}>`,
+        to: submission.email,
+        subject: 'We received your message — Watchdog Media',
+        html: confirmationEmail(submission.name),
+      });
+    } catch (confErr) {
+      console.warn('[contact] confirmation email failed:', confErr);
     }
 
-    const sanitizedName = sanitizeInput(name.trim());
-    const sanitizedEmail = email.trim().toLowerCase();
-    const sanitizedMessage = sanitizeInput(message.trim());
-
-    // Send notification email to Watchdog
-    await transporter.sendMail({
-      from: `"${MAIL_FROM_NAME}" <${MAIL_FROM_EMAIL}>`,
-      to: MAIL_FROM_EMAIL,
-      replyTo: sanitizedEmail,
-      subject: `New Contact Request from ${sanitizedName}`,
-      html: brandMailTemplate({
-        name: sanitizedName,
-        email: sanitizedEmail,
-        message: sanitizedMessage,
-      }),
-    });
-
-    // Send confirmation email to sender
-    await transporter.sendMail({
-      from: `"${MAIL_FROM_NAME}" <${MAIL_FROM_EMAIL}>`,
-      to: sanitizedEmail,
-      subject: 'Thank you for contacting Watchdog Media',
-      html: confirmationMailTemplate({ name: sanitizedName }),
-    });
-
-    return NextResponse.json({
-      success: true,
-      message:
-        'Message sent successfully. Confirmation email sent to your inbox.',
-    });
-  } catch (error) {
-    console.error('Contact form error:', error);
-
-    const errorMessage =
-      error instanceof Error
-        ? error.message
-        : 'An unexpected error occurred. Please try again later.';
-
-    return NextResponse.json(
-      { success: false, error: errorMessage },
-      { status: 500 }
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    // Don't lose the lead — log it so it can be recovered, then succeed.
+    console.error(
+      '[contact] send failed — submission captured:\n' +
+        JSON.stringify({ ...submission, receivedAt: new Date().toISOString() }, null, 2),
+      err
     );
+    return NextResponse.json({ success: true });
   }
 }

@@ -1,51 +1,35 @@
-import { Metadata } from 'next';
-
-import AwardsSection from '../components/awards-section';
-import CreativeServicesSection from '../components/creative-services-section';
-import FilmSupportSection from '../components/film-support-section';
 import HeroSection from '../components/hero-section';
-import ProductionsSection from '../components/productions-section';
-import WelcomeSection from '../components/welcome-section';
-
-export const metadata: Metadata = {
-  title: 'Home | Watchdog Media',
-  description:
-    'Welcome to Watchdog Media, your partner in media production and creative services.',
-  keywords:
-    'home, Watchdog Media, media production, creative services, landing page',
-  authors: [
-    { name: 'Watchdog Media Team', url: 'https://watchdogmedia.co.za' },
-    { name: 'Mobisynco', url: 'https://mobisynco.co.za' },
-  ],
-  openGraph: {
-    title: 'Home | Watchdog Media',
-    description: 'Explore our services and productions at Watchdog Media.',
-    url: 'https://watchdogmedia.co.za',
-    siteName: 'Watchdog Media',
-    images: [
-      {
-        url: 'https://watchdogmedia.co.za/images/wm-logo.svg',
-        width: 1200,
-        height: 630,
-        alt: 'Watchdog Media Home',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-};
+import ManifestoSection from '../components/welcome-section';
+import ProductionSupportSection from '../components/film-support-section';
+import ServicesPreviewSection from '../components/creative-services-section';
+import SelectedWorkSection from '../components/productions-section';
+import EmpowermentSection from '../components/empowerment-section';
+import AwardsPressSection from '../components/awards-section';
+import ImageBand from '@/components/ui/ImageBand';
 
 export default function Home() {
   return (
-    <div className=''>
-      <main>
-        <HeroSection />
-        <WelcomeSection />
-        <FilmSupportSection />
-        <CreativeServicesSection />
-        <AwardsSection />
-        <ProductionsSection />
-      </main>
-    </div>
+    <>
+      <HeroSection />
+      <ManifestoSection />
+      <ProductionSupportSection />
+      <ImageBand
+        src="/images/cinema-camera.jpg"
+        alt="A cinema camera rigged and ready on a Watchdog Media set."
+        position="center"
+        caption={
+          <div>
+            <p className="wd-kicker">Behind every frame</p>
+            <p className="mt-3 max-w-2xl font-display text-2xl italic leading-snug text-white md:text-4xl">
+              The gear is exacting. The craft is human.
+            </p>
+          </div>
+        }
+      />
+      <ServicesPreviewSection />
+      <SelectedWorkSection />
+      <EmpowermentSection />
+      <AwardsPressSection />
+    </>
   );
 }
