@@ -38,11 +38,11 @@ export default function PeoplePage() {
           <Reveal>
             <Kicker index='01'>Key crew</Kicker>
           </Reveal>
-          <div className='mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2 lg:grid-cols-3'>
+          <div className='mt-12 grid gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2'>
             {people.map((person, i) => (
               <Reveal
                 key={person.name}
-                delay={(i % 3) * 0.06}
+                delay={(i % 2) * 0.08}
                 className='group bg-ink p-8'
               >
                 <div className='flex items-center gap-4'>
