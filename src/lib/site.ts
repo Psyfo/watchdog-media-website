@@ -7,6 +7,18 @@
  * come from the supplied key art.
  */
 
+/**
+ * Base URL for canonicals, sitemap, OG/Twitter images and JSON-LD.
+ * Priority: explicit override (set NEXT_PUBLIC_SITE_URL=https://watchdogmedia.co.za
+ * once the domain is live) → the current Vercel production deployment (so previews
+ * and *.vercel.app render OG/canonical correctly) → the intended domain as fallback.
+ */
+const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : 'https://watchdogmedia.co.za');
+
 export const site = {
   name: 'Watchdog Media',
   legalName: 'Watchdog Media (Pty) Limited',
@@ -14,7 +26,7 @@ export const site = {
   description:
     'Watchdog Media is a Durban-based film production support and creative company telling courageous, craft-driven stories across KwaZulu-Natal — championing women on and off camera.',
   founded: 2016,
-  url: 'https://watchdogmedia.co.za',
+  url: SITE_URL,
   email: 'info@watchdogmedia.co.za',
   phone: '+27 (0)31 123 4567',
   phoneHref: '+27311234567',
