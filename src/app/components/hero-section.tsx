@@ -20,12 +20,12 @@ export default function HeroSection() {
       {/* Cinematic key art */}
       <div className='absolute inset-0'>
         <Image
-          src='/images/wm-hero-cinematic.png'
-          alt='A camera operator frames a shot on an ARRI cinema camera, lit in deep magenta on a film set.'
+          src='/images/hero-set.jpg'
+          alt='A camera operator and crew shoot a scene on a film set lit in deep red, actors on a couch in frame.'
           fill
           priority
           sizes='100vw'
-          className='object-cover object-[60%_center]'
+          className='object-cover object-center'
         />
         {/* Legibility: vertical + left scrim so the headline always reads */}
         <div

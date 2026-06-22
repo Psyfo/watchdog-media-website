@@ -96,7 +96,7 @@ const jsonLd = {
       foundingDate: String(site.founded),
       slogan: site.tagline,
       logo: `${site.url}/brand/avatar-512.png`,
-      image: `${site.url}/images/wm-hero-cinematic.png`,
+      image: `${site.url}/images/hero-set.jpg`,
       address: {
         '@type': 'PostalAddress',
         streetAddress: site.address.line1,
