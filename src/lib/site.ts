@@ -324,6 +324,27 @@ export const people: Person[] = [
     initials: 'SM',
     bio: "The multi-hyphenate who builds the platforms, sharpens the strategy and quietly saves the day — turning the vision into working systems and the odd impossible deadline. Family, not just crew.",
   },
+  {
+    name: 'Thandeka Mbeki',
+    role: 'Producer',
+    focus: 'Schedules · Delivery',
+    initials: 'TM',
+    bio: 'Turns ambition into a workable plan — schedules, budgets and a vetted heads-of-department roster, ready on day one.',
+  },
+  {
+    name: 'Bongani Dlamini',
+    role: 'Director of Photography',
+    focus: 'Camera · Light',
+    initials: 'BD',
+    bio: 'Shapes the cinematic contrast Watchdog is known for, from misted interiors to KwaZulu-Natal golden hour.',
+  },
+  {
+    name: 'Naledi Khoza',
+    role: 'Post & Edit',
+    focus: 'Edit · Colour',
+    initials: 'NK',
+    bio: 'Finds the film in the footage — pacing, rhythm and a final grade that makes every frame earn its place.',
+  },
 ];
 
 /* -------------------------------------------------------------------------- */
