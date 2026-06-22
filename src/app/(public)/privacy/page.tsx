@@ -1,13 +1,14 @@
-import type { Metadata } from 'next';
-
 import Container from '@/components/ui/Container';
 import PageHeader from '@/components/ui/PageHeader';
+import { pageMeta } from '@/lib/seo';
 import { site } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Privacy Policy',
-  description: `How ${site.name} collects, uses and protects your personal information under South Africa's POPIA.`,
-};
+  description:
+    "How Watchdog Media collects, uses and protects your personal information under South Africa's POPIA.",
+  path: '/privacy',
+});
 
 export default function PrivacyPage() {
   return (

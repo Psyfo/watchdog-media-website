@@ -1,18 +1,18 @@
-import type { Metadata } from 'next';
-
 import Container from '@/components/ui/Container';
 import Reveal from '@/components/ui/Reveal';
 import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
 import FounderFeature from '@/components/FounderFeature';
+import { pageMeta } from '@/lib/seo';
 import { people, productions } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'People',
   description:
-    'The crew behind Watchdog Media — leaders and heads of department who pair filmmaker instinct with operational discipline, championing women on and off camera.',
-};
+    'Meet Palesa Lebona, founder of Watchdog Media, and the crew who pair filmmaker instinct with operational discipline — championing women on and off camera.',
+  path: '/people',
+});
 
 export default function PeoplePage() {
   return (

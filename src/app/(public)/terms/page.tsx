@@ -1,13 +1,13 @@
-import type { Metadata } from 'next';
-
 import Container from '@/components/ui/Container';
 import PageHeader from '@/components/ui/PageHeader';
+import { pageMeta } from '@/lib/seo';
 import { site } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Terms of Use',
-  description: `The terms governing your use of the ${site.name} website.`,
-};
+  description: 'The terms that govern your use of the Watchdog Media website.',
+  path: '/terms',
+});
 
 export default function TermsPage() {
   return (
