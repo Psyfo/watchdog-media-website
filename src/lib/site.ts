@@ -175,9 +175,6 @@ export interface Production {
   poster: string;
   accent: string;
   meta: string;
-  still: string;
-  stillAlt: string;
-  stillPos?: string;
 }
 
 export const productions: Production[] = [
@@ -190,12 +187,9 @@ export const productions: Production[] = [
       "An evocative cinematic journey into South Africa's medical legacy and the campus that shaped a generation of healers.",
     credit: 'A film by Siyabonga Luthuli',
     role: 'Production support · Location services',
-    poster: '/images/poster-medunsa.png',
+    poster: '/images/prod-medunsa.jpg',
     accent: '#f0a83c',
     meta: 'In cinemas 2024',
-    still: '/images/still-medunsa.jpg',
-    stillAlt: 'A South African doctor — the legacy Medunsa documents.',
-    stillPos: 'center',
   },
   {
     slug: 'alignment',
@@ -206,12 +200,9 @@ export const productions: Production[] = [
       'Every connection has a consequence. A propulsive ensemble drama where ambition and intimacy collide.',
     credit: 'Created by Jessica Chen & David Lee',
     role: 'Key crew · Directing services',
-    poster: '/images/poster-alignment.png',
+    poster: '/images/prod-alignment.jpg',
     accent: '#ec008c',
     meta: 'Netflix · HBO Max · Apple TV+',
-    still: '/images/still-alignment.jpg',
-    stillAlt: 'A lead from the Alignment ensemble, lit for drama.',
-    stillPos: 'center',
   },
   {
     slug: 'cream',
@@ -222,12 +213,9 @@ export const productions: Production[] = [
       'Mystery, obsession and the things we keep in the dark. A noir-tinged portrait of desire and its undoing.',
     credit: 'A film by Eliza Vance',
     role: 'Creative services · Production support',
-    poster: '/images/poster-cream.png',
+    poster: '/images/prod-cream.jpg',
     accent: '#cfc7b6',
     meta: 'Festival circuit 2023',
-    still: '/images/still-cream.jpg',
-    stillAlt: 'The lead of Cream, half in shadow.',
-    stillPos: 'center',
   },
   {
     slug: 'taste-buds',
@@ -238,12 +226,9 @@ export const productions: Production[] = [
       'A feast of food and friendship. Sweet, Sour, Salty and Bitter learn the recipe for getting along.',
     credit: 'A Watchdog Media animation',
     role: 'Development · Animation · Post',
-    poster: '/images/poster-taste-buds.png',
+    poster: '/images/prod-tastebuds.png',
     accent: '#ffb13b',
     meta: 'Family · All ages',
-    still: '/images/still-tastebuds.jpg',
-    stillAlt: 'A voice from the Taste Buds team, mid-laugh.',
-    stillPos: 'top',
   },
 ];
 
