@@ -175,6 +175,9 @@ export interface Production {
   poster: string;
   accent: string;
   meta: string;
+  still: string;
+  stillAlt: string;
+  stillPos?: string;
 }
 
 export const productions: Production[] = [
@@ -190,6 +193,9 @@ export const productions: Production[] = [
     poster: '/images/poster-medunsa.png',
     accent: '#f0a83c',
     meta: 'In cinemas 2024',
+    still: '/images/still-medunsa.jpg',
+    stillAlt: 'A South African doctor — the legacy Medunsa documents.',
+    stillPos: 'center',
   },
   {
     slug: 'alignment',
@@ -203,6 +209,9 @@ export const productions: Production[] = [
     poster: '/images/poster-alignment.png',
     accent: '#ec008c',
     meta: 'Netflix · HBO Max · Apple TV+',
+    still: '/images/still-alignment.jpg',
+    stillAlt: 'A lead from the Alignment ensemble, lit for drama.',
+    stillPos: 'center',
   },
   {
     slug: 'cream',
@@ -216,6 +225,9 @@ export const productions: Production[] = [
     poster: '/images/poster-cream.png',
     accent: '#cfc7b6',
     meta: 'Festival circuit 2023',
+    still: '/images/still-cream.jpg',
+    stillAlt: 'The lead of Cream, half in shadow.',
+    stillPos: 'center',
   },
   {
     slug: 'taste-buds',
@@ -229,6 +241,9 @@ export const productions: Production[] = [
     poster: '/images/poster-taste-buds.png',
     accent: '#ffb13b',
     meta: 'Family · All ages',
+    still: '/images/still-tastebuds.jpg',
+    stillAlt: 'A voice from the Taste Buds team, mid-laugh.',
+    stillPos: 'top',
   },
 ];
 

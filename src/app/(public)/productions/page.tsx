@@ -84,7 +84,21 @@ export default function ProductionsPage() {
                   </p>
                 </Reveal>
 
-                <Reveal delay={0.15}>
+                <Reveal delay={0.12}>
+                  <figure className='relative mt-8 aspect-[16/10] max-w-lg overflow-hidden border border-white/10'>
+                    <Image
+                      src={p.still}
+                      alt={p.stillAlt}
+                      fill
+                      sizes='(max-width: 1024px) 100vw, 45vw'
+                      className='object-cover'
+                      style={{ objectPosition: p.stillPos ?? 'center' }}
+                    />
+                    <div className='absolute inset-0 bg-gradient-to-t from-ink/55 to-transparent' />
+                  </figure>
+                </Reveal>
+
+                <Reveal delay={0.18}>
                   <dl className='mt-10 grid max-w-lg grid-cols-1 gap-px overflow-hidden border border-white/10 bg-white/10 sm:grid-cols-2'>
                     <div className='bg-ink p-5'>
                       <dt className='wd-mono text-[0.65rem] uppercase tracking-widest text-faint'>
