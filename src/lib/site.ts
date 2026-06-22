@@ -36,10 +36,14 @@ export const site = {
     line3: 'South Africa, 3652',
   },
   region: 'KwaZulu-Natal, South Africa',
+  // Watchdog Media isn't a unique global handle, and Palesa is the brand —
+  // so these are the founder's personal, verified profiles.
   socials: [
-    { label: 'Instagram', handle: '@watchdogmedia', href: 'https://instagram.com/watchdogmedia', icon: 'instagram' },
-    { label: 'LinkedIn', handle: 'Watchdog Media', href: 'https://www.linkedin.com/company/watchdog-media-za', icon: 'linkedin' },
-    { label: 'YouTube', handle: 'Watchdog Media', href: 'https://www.youtube.com/@watchdogmedia', icon: 'youtube' },
+    { label: 'Instagram', handle: '@palesalebona', href: 'https://www.instagram.com/palesalebona/', icon: 'instagram' },
+    { label: 'Vimeo', handle: 'Palesa Lebona', href: 'https://vimeo.com/palesalebona', icon: 'vimeo' },
+    { label: 'LinkedIn', handle: 'Palesa Lebona', href: 'https://www.linkedin.com/in/palesalebona/', icon: 'linkedin' },
+    { label: 'X', handle: '@mspalesalebona', href: 'https://x.com/mspalesalebona', icon: 'x' },
+    { label: 'IMDb', handle: 'Palesa Lebona', href: 'https://www.imdb.com/name/nm6586690/', icon: 'imdb' },
   ],
 } as const;
 
