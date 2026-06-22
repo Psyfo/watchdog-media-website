@@ -271,39 +271,18 @@ export interface Person {
 
 export const people: Person[] = [
   {
-    name: 'Thandeka Mbeki',
-    role: 'Head of Production',
-    focus: 'Logistics · Delivery',
-    initials: 'TM',
-    bio: 'Runs the operational spine — schedules, budgets and the impossible permit — so the creative never has to flinch.',
+    name: 'Zamani Khumalo',
+    role: 'Head of Operations',
+    focus: 'Logistics · Business',
+    initials: 'ZK',
+    bio: "The industrial engineer behind Watchdog's operational backbone — budgets, logistics and the systems that keep a shoot, and a business, running on time. Palesa's partner on set and at home.",
   },
   {
-    name: 'Lerato Dube',
-    role: 'Head of Development & DEI',
-    focus: 'Stories · Equity',
-    initials: 'LD',
-    bio: 'Develops the slate and guards the promise: women and underrepresented crew, credited and paid, on every production.',
-  },
-  {
-    name: 'Sipho Nene',
-    role: 'Director of Photography',
-    focus: 'Camera · Light',
-    initials: 'SN',
-    bio: 'Shapes the cinematic contrast Watchdog is known for, from misted interiors to KZN golden hour.',
-  },
-  {
-    name: 'Aisha Patel',
-    role: 'Line Producer',
-    focus: 'Budgets · Crew',
-    initials: 'AP',
-    bio: 'Turns ambition into a workable plan and a vetted heads-of-department roster, ready on day one.',
-  },
-  {
-    name: 'Mandla Zulu',
-    role: 'Locations Manager',
-    focus: 'KZN · Access',
-    initials: 'MZ',
-    bio: 'Knows every coastline, warehouse and Midlands farm worth a frame — and everyone who holds the keys.',
+    name: 'Sipho Mahlangu',
+    role: 'Technology & Strategy',
+    focus: 'Digital · Systems',
+    initials: 'SM',
+    bio: "The multi-hyphenate who builds the platforms, sharpens the strategy and quietly saves the day — turning the vision into working systems and the odd impossible deadline. Family, not just crew.",
   },
 ];
 
