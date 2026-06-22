@@ -1,13 +1,14 @@
-import type { Metadata } from 'next';
-
 import Container from '@/components/ui/Container';
 import PageHeader from '@/components/ui/PageHeader';
+import { pageMeta } from '@/lib/seo';
 import { site } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Accessibility',
-  description: `${site.name}'s commitment to an accessible website for everyone.`,
-};
+  description:
+    "Watchdog Media's commitment to an accessible website for everyone, aiming for WCAG 2.1 AA.",
+  path: '/accessibility',
+});
 
 export default function AccessibilityPage() {
   return (

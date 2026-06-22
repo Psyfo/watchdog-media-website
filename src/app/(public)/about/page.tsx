@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import Container from '@/components/ui/Container';
@@ -7,12 +6,15 @@ import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
 import FounderFeature from '@/components/FounderFeature';
+import { pageMeta } from '@/lib/seo';
 import { site, stats, values } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'About',
-  description: `${site.name} is a Durban-based film production support and creative company. Corporate-grade reliability, artist-grade vision, women championed on and off camera.`,
-};
+  description:
+    'Watchdog Media is a Durban-based film production support and creative company — corporate-grade reliability, artist-grade vision, and women championed on and off camera.',
+  path: '/about',
+});
 
 export default function AboutPage() {
   return (

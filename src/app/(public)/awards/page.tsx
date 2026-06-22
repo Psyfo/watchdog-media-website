@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import { ArrowUpRightIcon, TrophyIcon } from '@phosphor-icons/react/dist/ssr';
 
 import Container from '@/components/ui/Container';
@@ -6,13 +5,15 @@ import Reveal from '@/components/ui/Reveal';
 import Kicker from '@/components/ui/Kicker';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
+import { pageMeta } from '@/lib/seo';
 import { awards, press } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Awards & Press',
   description:
     'Recognition for Watchdog Media — festival awards, industry honours and press coverage for craft, production support and women in film.',
-};
+  path: '/awards',
+});
 
 export default function AwardsPage() {
   return (

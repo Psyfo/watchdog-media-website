@@ -1,17 +1,18 @@
-import type { Metadata } from 'next';
 import Image from 'next/image';
 
 import Container from '@/components/ui/Container';
 import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
+import { pageMeta } from '@/lib/seo';
 import { productions } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Productions',
   description:
     'Selected productions from Watchdog Media — animation, documentary, short film and series, supported and created across KwaZulu-Natal.',
-};
+  path: '/productions',
+});
 
 export default function ProductionsPage() {
   return (

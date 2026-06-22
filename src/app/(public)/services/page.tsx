@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import {
   FilmSlateIcon,
   MapPinIcon,
@@ -20,13 +19,15 @@ import Reveal from '@/components/ui/Reveal';
 import Button from '@/components/ui/Button';
 import PageHeader from '@/components/ui/PageHeader';
 import ImageBand from '@/components/ui/ImageBand';
+import { pageMeta } from '@/lib/seo';
 import { services, formats, site } from '@/lib/site';
 
-export const metadata: Metadata = {
+export const metadata = pageMeta({
   title: 'Services',
   description:
     'Production support, location support, directing, key crew and creative services for film productions across Durban and KwaZulu-Natal.',
-};
+  path: '/services',
+});
 
 const icons: Record<string, PhosphorIcon> = {
   clapperboard: FilmSlateIcon,
