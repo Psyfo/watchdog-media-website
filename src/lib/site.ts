@@ -249,6 +249,30 @@ export const productions: Production[] = [
 ];
 
 /* -------------------------------------------------------------------------- */
+/* Films — the founder's public Vimeo work (vimeo.com/palesalebona)             */
+/* -------------------------------------------------------------------------- */
+
+export interface Film {
+  title: string;
+  kind: string;
+  year: string;
+  duration: string;
+  durationISO: string;
+  uploadDate: string;
+  url: string;
+  thumb: string;
+}
+
+export const films: Film[] = [
+  { title: 'Palesa Lebona — Reel', kind: 'Showreel', year: '2017', duration: '1:36', durationISO: 'PT1M36S', uploadDate: '2017-10-14', url: 'https://vimeo.com/238169091', thumb: '/images/films/238169091.jpg' },
+  { title: 'Women in the Film Industry', kind: 'Documentary', year: '2020', duration: '2:53', durationISO: 'PT2M53S', uploadDate: '2020-07-03', url: 'https://vimeo.com/435063913', thumb: '/images/films/435063913.jpg' },
+  { title: 'Cream', kind: 'Short film · Trailer', year: '2017', duration: '0:37', durationISO: 'PT37S', uploadDate: '2017-02-04', url: 'https://vimeo.com/202574564', thumb: '/images/films/202574564.jpg' },
+  { title: 'Slumber Party', kind: 'Trailer', year: '2019', duration: '0:45', durationISO: 'PT45S', uploadDate: '2019-03-18', url: 'https://vimeo.com/325045987', thumb: '/images/films/325045987.jpg' },
+  { title: 'Holier than Thou', kind: 'Short film', year: '2016', duration: '4:13', durationISO: 'PT4M13S', uploadDate: '2016-01-19', url: 'https://vimeo.com/152372312', thumb: '/images/films/152372312.jpg' },
+  { title: 'Bun in the Oven', kind: 'Music video', year: '2014', duration: '4:20', durationISO: 'PT4M20S', uploadDate: '2014-02-20', url: 'https://vimeo.com/87222835', thumb: '/images/films/87222835.jpg' },
+];
+
+/* -------------------------------------------------------------------------- */
 /* Founder                                                                     */
 /* -------------------------------------------------------------------------- */
 
